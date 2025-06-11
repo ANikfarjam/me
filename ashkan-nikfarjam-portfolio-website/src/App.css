@@ -1,0 +1,224 @@
+.App {
+  text-align: center;
+}
+
+body,html { margin:0; padding:0; }
+
+.bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url('assets/bg.png') center/cover no-repeat;
+  z-index: -1;
+}
+.section-content {
+  max-width: 0 auto;
+  margin: 0 auto;
+  padding: 0 auto;
+}
+
+.profile-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 40px;
+  flex-wrap: wrap; /* ensures responsiveness */
+  color: #fffefe;
+  background: rgba(45, 58, 78, 0.483);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+/* .about-section-content {
+  max-width: 0 auto;
+  margin: 0 auto;
+  padding: 0 auto;
+}
+.about-section-content h1{
+  text-align: left;
+} */
+.about-content {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 40px;
+  flex-wrap: wrap; /* ensures responsiveness */
+  color: #fffefe;
+  background: rgba(69, 92, 130, 0.483);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+.about-content p{
+  text-align: justify;
+}
+
+/* Poject section */
+.projects-container {
+  /* display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 40px;
+  flex-wrap: wrap; 
+  color: #fffefe;
+  background: rgba(25, 32, 43, 0.483);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
+  color: #fffefe;
+  background: rgba(192, 199, 210, 0.483);
+}
+.profile-text {
+  flex: 1;
+  text-align: left;
+}
+.profile-text h2 {
+  margin-top: 0;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #333;
+  padding-bottom: 0.5rem;
+}
+
+.profile-text ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.profile-image {
+  flex: 0 0 auto;
+}
+
+.profile-img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #333;
+}
+
+.nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 1rem;
+  z-index: 5;
+}
+
+.nav-link {
+  color: white;
+  margin: 0 1rem;
+  cursor: pointer;
+}
+
+.content {
+  margin-top: 60px;
+}
+
+.section {
+  min-height: 10vh;
+  padding: 2rem;
+  /* background: rgba(255, 255, 255, 0.8); */
+}
+
+/* New Styles for Portfolio Picture */
+.section-left-right {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  justify-content: center; /* horizontally center content */
+  flex-wrap: wrap; /* responsive layout */
+}
+
+.left {
+  flex: 0 0 auto;
+}
+
+.portfolio-img {
+  width: 120px;      /* Make it small */
+  height: 120px;     /* Ensure it's a circle */
+  border-radius: 50%;
+  object-fit: cover; /* Crop to fit the circle shape */
+  border: 3px solid #333; /* Optional: adds a border */
+}
+/* Container holding all the project cards */
+.projects-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+}
+
+/* Introductory paragraph styling */
+.projects-intro {
+  text-align: center;
+  font-size: 1.1rem;
+  max-width: 800px;
+  margin: 0 auto 1rem;
+  color: #ddd;
+}
+
+/* Grid layout for the project cards */
+.project-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* Each individual project card */
+.project-card {
+  background-color: #222;
+  color: #fff;
+  width: 260px;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* Hover effect for project cards */
+.project-card:hover {
+  transform: translateY(-5px);
+  background-color: #333;
+}
+
+/* Image container */
+.project-image {
+  width: 100%;
+  height: 150px;
+  background-color: #444;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+/* Actual image (use object-fit to handle different aspect ratios) */
+.project-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Project title */
+.project-card h3 {
+  margin: 0.5rem 0;
+  font-size: 1.2rem;
+}
+
+/* Project description */
+.project-card p {
+  font-size: 0.95rem;
+  color: #ccc;
+  line-height: 1.4;
+}
