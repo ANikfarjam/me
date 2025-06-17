@@ -1,16 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, Element } from 'react-scroll';
 import portfolio_img from './assets/portpic.jpg';
 import genescope_icon from './assets/genescope.ico';
 import xrayImg from './assets/xray.png';
 import staircaseImg from './assets/staircase.jpeg'
 import ReactMarkdown from 'react-markdown';
-import geneScope_md from './projects/GeneScope/GeneScope.md?raw'
+// import geneScope_md from './projects/GeneScope/GeneScope.md?raw'
 import './App.css';
 
 function App() {
   // for selectin specific project
   const [selectedProject, setSelectedProject] = useState(null);
+
+  const [geneScopeContent, setGeneScopeContent] = useState('');
+  useEffect(() => {
+    fetch(`${process.env.PUBLIC_URL}/projects/GeneScope/GeneScope.md`)
+      .then(res => res.text())
+      .then(setGeneScopeContent);
+  }, []);
 
   const sections = [
     {
@@ -69,7 +76,7 @@ function App() {
                 name: 'GeneScope',
                 description: 'A deep learning platform for biomedical research that classifies breast cancer stages using multimodal data and integrates an LLM-powered chatbot.',
                 image: genescope_icon,
-                detailedDescription:  <ReactMarkdown>{geneScope_md}</ReactMarkdown>
+                detailedDescription:  <ReactMarkdown>{geneScopeContent}</ReactMarkdown>
               },
               {
                 name: 'X-ray-Image_classification_CNNRNN',
