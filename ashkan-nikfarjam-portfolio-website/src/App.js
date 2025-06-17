@@ -12,12 +12,31 @@ function App() {
   // for selectin specific project
   const [selectedProject, setSelectedProject] = useState(null);
 
+  // genescope project
   const [geneScopeContent, setGeneScopeContent] = useState('');
   useEffect(() => {
     fetch(`${process.env.PUBLIC_URL}/projects/GeneScope/GeneScope.md`)
       .then(res => res.text())
       .then(setGeneScopeContent);
   }, []);
+
+  // stairCase project
+  const [stairCaseContent, setstairCaseContent] = useState('');
+  useEffect(() => {
+    fetch(`${process.env.PUBLIC_URL}/projects/GeneScope/GeneScope.md`)
+      .then(res => res.text())
+      .then(setstairCaseContent);
+  }, []);
+
+  // xray image project
+  const [xrayContent, setxrayContent] = useState('');
+  useEffect(() => {
+    fetch(`${process.env.PUBLIC_URL}/projects/xRayImage/xray.md`)
+      .then(res => res.text())
+      .then(setxrayContent);
+  }, []);
+
+
 
   const sections = [
     {
@@ -82,13 +101,13 @@ function App() {
                 name: 'X-ray-Image_classification_CNNRNN',
                 description: 'An X-ray image classifier using a CNN-RNN hybrid model to detect and classify bone fractures.',
                 image: xrayImg,
-                detailedDescription: '------------'
+                detailedDescription: <ReactMarkdown>{xrayContent}</ReactMarkdown>
               },
               {
                 name: 'StairCase',
                 description: 'A cross-platform multiplayer game with AI-driven trivia and hangman mini-games using LangChain agents.',
                 image: staircaseImg,
-                detailedDescription: '------------'
+                detailedDescription: <ReactMarkdown>{stairCaseContent}</ReactMarkdown>
               }
             ].map((project) => (
               <div key={project.name} className="project-card">
