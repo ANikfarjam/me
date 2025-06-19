@@ -5,6 +5,7 @@ import genescope_icon from './assets/genescope.ico';
 import xrayImg from './assets/xray.png';
 import staircaseImg from './assets/staircase.jpeg'
 import ReactMarkdown from 'react-markdown';
+import ImageSlider from './components/imageSlider';
 // import geneScope_md from './projects/GeneScope/GeneScope.md?raw'
 import './App.css';
 
@@ -19,6 +20,32 @@ function App() {
       .then(res => res.text())
       .then(setGeneScopeContent);
   }, []);
+
+  //creating project images
+  const geneScopeImages = [
+    '/projects/GeneScope/media/catMLP.png',
+    '/projects/GeneScope/media/AHP.png',
+    '/projects/GeneScope/media/Catboos.png',
+    '/projects/GeneScope/media/cox.png'
+  ];
+  const stairCaseImages = [
+    '/projects/StairCase/media/landing.png',
+    '/projects/StairCase/media/dashboard.png',
+    '/projects/StairCase/media/login.png',
+    '/projects/StairCase/media/menue.png',
+    '/projects/StairCase/media/game.png',
+    '/projects/StairCase/media/langchain.png'
+  ]
+
+  const xrayImages = [
+    '/projects/xRayImage/image/intro.png',
+    '/projects/xRayImage/image/dataprocessing.png',
+    '/projects/xRayImage/image/mainmodel.png',
+    '/projects/xRayImage/image/NAS.png',
+    '/projects/xRayImage/image/classificationReport.png',
+    '/projects/xRayImage/image/comparison.png'
+    
+  ]
 
   // stairCase project
   const [stairCaseContent, setstairCaseContent] = useState('');
@@ -95,18 +122,21 @@ function App() {
                 name: 'GeneScope',
                 description: 'A deep learning platform for biomedical research that classifies breast cancer stages using multimodal data and integrates an LLM-powered chatbot.',
                 image: genescope_icon,
+                imageGallery: geneScopeImages,
                 detailedDescription:  <ReactMarkdown>{geneScopeContent}</ReactMarkdown>
               },
               {
                 name: 'X-ray-Image_classification_CNNRNN',
                 description: 'An X-ray image classifier using a CNN-RNN hybrid model to detect and classify bone fractures.',
                 image: xrayImg,
+                imageGallery: xrayImages,
                 detailedDescription: <ReactMarkdown>{xrayContent}</ReactMarkdown>
               },
               {
                 name: 'StairCase',
                 description: 'A cross-platform multiplayer game with AI-driven trivia and hangman mini-games using LangChain agents.',
                 image: staircaseImg,
+                imageGallery:stairCaseImages,
                 detailedDescription: <ReactMarkdown>{stairCaseContent}</ReactMarkdown>
               }
             ].map((project) => (
@@ -149,7 +179,8 @@ function App() {
         <div className="modal-overlay" onClick={() => setSelectedProject(null)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <h2>{selectedProject.name.replace(/_/g, ' ')}</h2>
-            <img src={selectedProject.image} alt={selectedProject.name} className="modal-img" />
+            {/* Image slider here */}
+            <ImageSlider images={selectedProject.imageGallery} />
             <div className="markdown-body">
               {selectedProject.detailedDescription}
             </div>
@@ -157,6 +188,7 @@ function App() {
           </div>
         </div>
       )}
+
       <div className="bg" />
       <nav className="nav">
         {sections.map(section => (

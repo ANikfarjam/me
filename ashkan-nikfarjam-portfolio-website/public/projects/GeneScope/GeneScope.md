@@ -16,7 +16,6 @@ These two models are integrated through intermediate fusion, where outputs from 
 
 To improve robustness and reduce bias from unbalanced datasets, the platform compares this fusion model against a baseline SMOTE-augmented MLP. Despite SMOTE achieving slightly higher accuracy, GeneScope’s fusion model is preferred in medical contexts due to its preservation of clinical data integrity and interpretability.
 
-![CatBook MLP mutimodal](./media/catMLP.png)
 
 ### Retrival Augmented Generative ChatBot
 
@@ -44,20 +43,17 @@ This ranking system combines the results of five statistical tests commonly used
 
 For each method, genes were ranked based on performance, and pairwise comparison matrices were generated. Then the eigenvectors and eigenvalues of these matrices were computed to derive priority weights, which were averaged to create a final ranking of genes. This ranked list highlights genes most likely to be unregulated or mutated during cancer progression.
 
-![AHP](./media/AHP.png)
-
 ### Catboost Model for 
 
 In GeneScope, CatBoost was used to estimate the probability that a patient sample belongs to each breast cancer stage. Rather than assigning a hard label (e.g., Stage II or Stage III), CatBoost generates a probability distribution across all stages, enabling a more flexible and informative view of disease severity.
 
 Compared to manual calculation, the CatBoost model demonstrated superior predictive accuracy by learning complex, nonlinear relationships within the clinical dataset. This allowed for better stratification of borderline cases and more nuanced interpretation of disease progression across patient profiles.
 
-![AHP](./media/Catboos.png)
+
 ### Cox Proportional Hazards Model
 
 To assess survival risk, we used the Cox Proportional Hazards Model, a statistical technique widely used in medical research. It estimates the hazard ratio, which quantifies how different variables (such as gene expression levels or tumor characteristics) affect the risk of adverse outcomes over time.
 
-![cox](./media/cox.png)
 ## Implementation and Deployment
 
 The frontend is developed using React with TypeScript, providing a responsive and interactive user experience, and is hosted on Vercel for fast, global delivery. The analytical engine and all visualization dashboards, including statistical evaluations, model performance summaries, and gene ranking plots—are built using Marimo, a Python-based interactive notebook framework. These Marimo notebooks are wrapped in a FastAPI interface and served as endpoints through a RapidAPI-style backend, allowing seamless communication between the UI and analytical layer. The entire backend, including API routing and model inference, is deployed on Render, enabling scalable execution of real-time data processing and retrieval-augmented responses.
