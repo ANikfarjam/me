@@ -1,20 +1,24 @@
 {
   "files": {
-    "main.css": "/AshkanNikfarjam.github.io/static/css/main.e2065462.css",
-    "main.js": "/AshkanNikfarjam.github.io/static/js/main.8fa90e27.js",
+    "main.css": "/AshkanNikfarjam.github.io/static/css/main.79ac26f0.css",
+    "main.js": "/AshkanNikfarjam.github.io/static/js/main.63ee1c9c.js",
     "static/js/453.c11d07f6.chunk.js": "/AshkanNikfarjam.github.io/static/js/453.c11d07f6.chunk.js",
+    "static/media/connect4.png": "/AshkanNikfarjam.github.io/static/media/connect4.4409fafae318ecbbe5d6.png",
     "static/media/portpic.jpg": "/AshkanNikfarjam.github.io/static/media/portpic.82a38c9426d08070fdf9.jpg",
     "static/media/bg.png": "/AshkanNikfarjam.github.io/static/media/bg.2b13053616c00758412f.png",
+    "static/media/healthmap.png": "/AshkanNikfarjam.github.io/static/media/healthmap.781b3f58019fd024021c.png",
     "static/media/staircase.jpeg": "/AshkanNikfarjam.github.io/static/media/staircase.0cca809f761dc38970bd.jpeg",
     "static/media/xray.png": "/AshkanNikfarjam.github.io/static/media/xray.6a767d464715dc830007.png",
     "static/media/genescope.ico": "/AshkanNikfarjam.github.io/static/media/genescope.a8bea3d2936ed8ef27c4.ico",
+    "static/media/germany.jpg": "/AshkanNikfarjam.github.io/static/media/germany.d5814052742a87147b08.jpg",
+    "static/media/geneQuest.jpg": "/AshkanNikfarjam.github.io/static/media/geneQuest.821b5fb6fd9c8a43c815.jpg",
     "index.html": "/AshkanNikfarjam.github.io/index.html",
-    "main.e2065462.css.map": "/AshkanNikfarjam.github.io/static/css/main.e2065462.css.map",
-    "main.8fa90e27.js.map": "/AshkanNikfarjam.github.io/static/js/main.8fa90e27.js.map",
+    "main.79ac26f0.css.map": "/AshkanNikfarjam.github.io/static/css/main.79ac26f0.css.map",
+    "main.63ee1c9c.js.map": "/AshkanNikfarjam.github.io/static/js/main.63ee1c9c.js.map",
     "453.c11d07f6.chunk.js.map": "/AshkanNikfarjam.github.io/static/js/453.c11d07f6.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e2065462.css",
-    "static/js/main.8fa90e27.js"
+    "static/css/main.79ac26f0.css",
+    "static/js/main.63ee1c9c.js"
   ]
 }

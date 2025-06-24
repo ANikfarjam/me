@@ -1,0 +1,5 @@
+
+# Connect 4 Game AI-Powered 
+Recreated the game Connect 4 using Python, and the PyGame library. Developed a utility-based AI agent with a custom evaluation function, utilizing the minimax algorithm with alpha-beta pruning to select optimal moves and maximize scoring
+
+The game features a single-player mode where the user competes against an AI opponent. The board is modeled as a 6x7 grid, and the player interacts via a PyGame-rendered interface. The AI uses the minimax algorithm with alpha-beta pruning to evaluate potential future board states, selecting the most strategic moves based on a custom evaluation function. This function prioritizes center control, potential four-in-a-row opportunities, and blocking the player’s advances. The result is a responsive and competitive AI that simulates human-like decision-making, offering a challenging experience for users.
