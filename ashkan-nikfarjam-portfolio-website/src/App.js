@@ -1,9 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Component } from 'react';
+import { FaGithub, FaLinkedin, FaEnvelope, FaPhoneAlt } from 'react-icons/fa';
 import { Link, Element } from 'react-scroll';
 import portfolio_img from './assets/portpic.jpg';
 import genescope_icon from './assets/genescope.ico';
 import xrayImg from './assets/xray.png';
-import staircaseImg from './assets/staircase.jpeg'
+import staircaseImg from './assets/staircase.jpeg';
+import stockMarketLogo from './assets/stockMarket.png';
+import geneQuestIcon from './assets/geneQuest.jpg';
+import germanyIcon from './assets/germany.jpg';
+import connect4Icon from './assets/connect4.png';
+import healthmapIcon from './assets/healthmap.png';
 import ReactMarkdown from 'react-markdown';
 import ImageSlider from './components/imageSlider';
 // import geneScope_md from './projects/GeneScope/GeneScope.md?raw'
@@ -20,38 +26,10 @@ function App() {
       .then(res => res.text())
       .then(setGeneScopeContent);
   }, []);
-
-  //creating project images
-  const geneScopeImages = [
-    'https://raw.githubusercontent.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/GeneScope/media/catMLP.png',
-    'https://raw.githubusercontent.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/GeneScope/media/AHP.png',
-    'https://raw.githubusercontent.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/GeneScope/media/Catboos.png',
-    'https://raw.githubusercontent.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/GeneScope/media/cox.png'
-  ];
-
-  const stairCaseImages = [
-    '/projects/StairCase/media/landing.png',
-    '/projects/StairCase/media/dashboard.png',
-    '/projects/StairCase/media/login.png',
-    '/projects/StairCase/media/menue.png',
-    '/projects/StairCase/media/game.png',
-    '/projects/StairCase/media/langchain.png'
-  ]
-
-  const xrayImages = [
-    '/projects/xRayImage/image/intro.png',
-    '/projects/xRayImage/image/dataprocessing.png',
-    '/projects/xRayImage/image/mainmodel.png',
-    '/projects/xRayImage/image/NAS.png',
-    '/projects/xRayImage/image/classificationReport.png',
-    '/projects/xRayImage/image/comparison.png'
-    
-  ]
-
   // stairCase project
   const [stairCaseContent, setstairCaseContent] = useState('');
   useEffect(() => {
-    fetch(`${process.env.PUBLIC_URL}/projects/GeneScope/GeneScope.md`)
+    fetch(`${process.env.PUBLIC_URL}/projects/StairCase/StairCase.md`)
       .then(res => res.text())
       .then(setstairCaseContent);
   }, []);
@@ -64,7 +42,102 @@ function App() {
       .then(setxrayContent);
   }, []);
 
+  //genequest project contents
+  const [geneQuestContent, setgeneQuestContent] = useState('');
+  useEffect(() => {
+    fetch(`${process.env.PUBLIC_URL}/projects/geneQuest/geneQuest.md`)
+      .then(res => res.text())
+      .then(setgeneQuestContent);
+  }, []);
 
+  //stockMarket
+  const [stockMarketContent, setstockMarketContent] = useState('');
+  useEffect(() => {
+    fetch(`${process.env.PUBLIC_URL}/projects/StockMarket/stockMarket.md`)
+      .then(res => res.text())
+      .then(setstockMarketContent);
+  }, []);
+
+  //germanPlus
+  const [gemanCityContent, setgemanCityContent] = useState('');
+  useEffect(() => {
+    fetch(`${process.env.PUBLIC_URL}/projects/German/german.md`)
+      .then(res => res.text())
+      .then(setgemanCityContent);
+  }, []);
+  //connect4
+  const [connect4Content, setconnect4Content] = useState('');
+  useEffect(() => {
+    fetch(`${process.env.PUBLIC_URL}/projects/connect4/connect4.md`)
+      .then(res => res.text())
+      .then(setconnect4Content);
+  }, []);
+
+  //heathmap
+  const [healthMapContent, sethealthMapContent] = useState('');
+  useEffect(() => {
+    fetch(`${process.env.PUBLIC_URL}/projects/healthmap/healthmap.md`)
+      .then(res => res.text())
+      .then(sethealthMapContent);
+  }, []);
+
+  //creating project images
+  const geneScopeImages = [
+    'https://raw.githubusercontent.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/GeneScope/media/catMLP.png',
+    'https://raw.githubusercontent.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/GeneScope/media/AHP.png',
+    'https://raw.githubusercontent.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/GeneScope/media/Catboos.png',
+    'https://raw.githubusercontent.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/GeneScope/media/cox.png'
+  ];
+
+  const stairCaseImages = [
+    'https://raw.github.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/StairCase/media/landing.png',
+    'https://raw.github.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/StairCase/media/dashboard.png',
+    'https://raw.github.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/StairCase/media/login.png',
+    'https://raw.github.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/StairCase/media/menue.png',
+    'https://raw.github.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/StairCase/media/game.png',
+    'https://raw.github.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/StairCase/media/langchain.png'
+  ];
+
+  const xrayImages = [
+    'https://raw.github.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/xRayImage/image/intro.png',
+    'https://raw.github.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/xRayImage/image/dataprocessing.png',
+    'https://raw.github.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/xRayImage/image/mainmodel.png',
+    'https://raw.github.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/xRayImage/image/NAS.png',
+    'https://raw.github.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/xRayImage/image/classificationReport.png',
+    'https://raw.github.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/xRayImage/image/comparison.png'
+    
+  ];
+
+  const genequestImges = [
+    'https://raw.github.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/geneQuest/media/GenBank.jpeg',
+    'https://raw.github.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/geneQuest/media/allignment.jpeg',
+    'https://raw.github.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/geneQuest/media/conservative.jpeg'
+  ];
+
+  const stockMarketImges = [
+    'https://raw.github.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/StockMarket/media/landingPage.png',
+    'https://raw.github.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/StockMarket/media/login.png',
+    'https://raw.github.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/StockMarket/media/news.png',
+    'https://raw.github.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/StockMarket/media/stocks.png',
+    'https://raw.github.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/StockMarket/media/admin.png',
+    'https://raw.github.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/StockMarket/media/instert.png',
+    'https://raw.github.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/StockMarket/media/logs.png'
+  ];
+
+  const germanImges = [
+    'https://raw.github.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/German/media/image.png',
+    'https://raw.github.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/German/media/image1.png',
+    'https://raw.github.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/German/media/image2.png',
+    'https://raw.github.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/German/media/image3.png',
+    'https://raw.github.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/German/media/image4.png',
+    'https://raw.github.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/German/media/mlPage.png'
+  ];
+  
+
+  const connect4Imges = [
+    'https://raw.github.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/connect4/media/game.jpeg'
+  ];
+  const healthmapImeges = ['https://raw.github.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/healthMap/image/healthmap.jpeg'];
 
   const sections = [
     {
@@ -74,13 +147,28 @@ function App() {
         <div className="section-content">
           <div className="profile-container">
             <div className="profile-text">
-              <h1>
-                Ashkan Nikfarjam
-              </h1>
+              <h1>Ashkan Nikfarjam</h1>
               <ul>
                 <li>Data Scientist and Full Stack Developer.</li>
                 <li>San Jose State University, Class of 2025</li>
               </ul>
+              <div className="contact-icons">
+                <a href="https://github.com/ANikfarjam" target="_blank" rel="noopener noreferrer">
+                  <FaGithub size={24} />
+                </a>
+                <a href="https://www.linkedin.com/in/ashkan-nikfarjam/" target="_blank" rel="noopener noreferrer">
+                  <FaLinkedin size={24} />
+                </a>
+                <div className="contact-item">
+                  <FaEnvelope size={24} />
+                  <span>ashkan_nikfarjam@yahoo.com</span>
+                </div>
+                <div className="contact-item">
+                  <FaPhoneAlt size={24} />
+                  <span>+1 (408) 843-0173</span>
+                </div>
+              </div>
+
             </div>
             <div className="profile-image">
               <img src={portfolio_img} alt="Ashkan Nikfarjam" className="profile-img" />
@@ -139,7 +227,43 @@ function App() {
                 image: staircaseImg,
                 imageGallery:stairCaseImages,
                 detailedDescription: <ReactMarkdown>{stairCaseContent}</ReactMarkdown>
-              }
+              },
+              {
+                name: 'GeneQuest',
+                description: 'A Genomic reasearch web app that unify BLAST, GenBank search, and phylogenetic tools into one simple interface',
+                image: geneQuestIcon,
+                imageGallery:genequestImges,
+                detailedDescription: <ReactMarkdown>{geneQuestContent}</ReactMarkdown>
+              },
+              {
+                name: 'MokeTheStock',
+                description: 'A full-stack web application built to simulate real-world trading.',
+                image: stockMarketLogo,
+                imageGallery:stockMarketImges,
+                detailedDescription: <ReactMarkdown>{stockMarketContent}</ReactMarkdown>
+              },
+              {
+                name: 'CityPlus(Germany)',
+                description: 'A  recommendation web app design to recommend a city in Germany tailored to the users preferances.',
+                image: germanyIcon,
+                imageGallery:germanImges,
+                detailedDescription: <ReactMarkdown>{gemanCityContent}</ReactMarkdown>
+              },
+              {
+                name: 'Connect4',
+                description: 'A single player Connect4 game where players play against an AI agent.',
+                image: connect4Icon,
+                imageGallery:connect4Imges,
+                detailedDescription: <ReactMarkdown>{connect4Content}</ReactMarkdown>
+              },
+              {
+                name: 'HealthMap',
+                description: 'An intractive Data Visualization dashboard, anlysing most common raspitory desease across the US.',
+                image: healthmapIcon,
+                imageGallery:healthmapImeges,
+                detailedDescription: <ReactMarkdown>{healthMapContent}</ReactMarkdown>
+              },
+
             ].map((project) => (
               <div key={project.name} className="project-card">
                 <div className="project-image">

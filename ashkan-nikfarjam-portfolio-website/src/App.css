@@ -277,3 +277,24 @@ body,html { margin:0; padding:0; }
   overflow-y: auto;
   line-height: 1.6;
 }
+/* content icons */
+.contact-icons {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.contact-icons a {
+  color: #fff; /* or any color matching your theme */
+  transition: transform 0.2s ease;
+}
+
+.contact-icons a:hover {
+  transform: scale(1.1);
+}
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #fff;
+}

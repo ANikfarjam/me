@@ -1,6 +1,6 @@
 # Stock Market Management System
 
-The Stock Market Management System (internally named Stonks Market) is a full-stack web application built to simulate real-world trading in a safe, educational environment. It was designed to help beginner investors understand stock market dynamics without financial risk. The platform uses real S&P 500 data, enabling users to virtually buy, sell, and analyze stocks, while also providing portfolio tracking, analytics, and stock-related news updates.
+The Stock Market Management System is a full-stack web application built to simulate real-world trading in a safe, educational environment. It was designed to help beginner investors understand stock market dynamics without financial risk. The platform uses real S&P 500 data, enabling users to virtually buy, sell, and analyze stocks, while also providing portfolio tracking, analytics, and stock-related news updates.
 
 ## Project Objective
 The goal of this application was to create a simulation-based learning tool for stock trading, catering especially to those without prior investment experience. The platform allows users to:
