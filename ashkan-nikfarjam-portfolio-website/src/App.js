@@ -23,11 +23,12 @@ function App() {
 
   //creating project images
   const geneScopeImages = [
-    '/projects/GeneScope/media/catMLP.png',
-    '/projects/GeneScope/media/AHP.png',
-    '/projects/GeneScope/media/Catboos.png',
-    '/projects/GeneScope/media/cox.png'
+    'https://raw.githubusercontent.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/GeneScope/media/catMLP.png',
+    'https://raw.githubusercontent.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/GeneScope/media/AHP.png',
+    'https://raw.githubusercontent.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/GeneScope/media/Catboos.png',
+    'https://raw.githubusercontent.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/GeneScope/media/cox.png'
   ];
+
   const stairCaseImages = [
     '/projects/StairCase/media/landing.png',
     '/projects/StairCase/media/dashboard.png',
