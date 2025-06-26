@@ -12,7 +12,8 @@ import connect4Icon from './assets/connect4.png';
 import healthmapIcon from './assets/healthmap.png';
 import ReactMarkdown from 'react-markdown';
 import ImageSlider from './components/imageSlider';
-import WorkExperienceTimeline from './components/workexperience'
+import WorkExperienceTimeline from './components/workexperience';
+import TriangleMesh from './components/triablemesh'
 // import geneScope_md from './projects/GeneScope/GeneScope.md?raw'
 import './App.css';
 
@@ -164,10 +165,10 @@ function App() {
                   <FaEnvelope size={24} />
                   <span>ashkan_nikfarjam@yahoo.com</span>
                 </div>
-                <div className="contact-item">
+                {/* <div className="contact-item">
                   <FaPhoneAlt size={24} />
                   <span>+1 (408) 843-0173</span>
-                </div>
+                </div> */}
               </div>
 
             </div>
@@ -288,18 +289,75 @@ function App() {
       )
     },
     {
-      id: 'Contact',
-      title: 'Get in Touch',
+      id: 'Education',
+      title: '',
       content: (
-        <p>
-          Email me at <a href="mailto:ashkan@example.com">ashkan@example.com</a> to collaborate!
-        </p>
+        <div className="edu-content">
+          <h1>Education</h1>
+          <div style={{ lineHeight: '1.6' }}>
+            <h2>San Jose State University</h2>
+            <p><strong>B.S. in Data Science</strong></p>
+            <p>Aug 2023 – May 2025</p>
+
+            <h2>City College of San Francisco</h2>
+            <p><strong>Transfer A.A. in Mathematics, GPA: 3.88</strong></p>
+            <p>Jan 2012 – May 2023</p>
+
+            <h2>Mission College</h2>
+            <p><strong>CCNA (Cisco Certified Network Administrator) – Certificate of Completion</strong></p>
+            <p>2018</p>
+          </div>
+        </div>
       )
-    }
+    },
+     {
+      id: 'Intrests and side projects',
+      title: '',
+      content: (
+        <div class='side-projects'>
+          <p>
+            I constantly seek out new developments in AI and Machine Learning to sharpen my expertise. As a data scientist and someone who believes in using AI to drive innovation, I’ve honed my skills across various domains, from biomedical research to intelligent systems. Beyond theoretical understanding, I actively explore cutting-edge tools like deep learning frameworks, generative models, and reinforcement learning. I’m particularly drawn to the creative and engineering challenges AI presents—whether it's building intelligent agents, developing real-world applications, or contributing to open-source projects that push the boundaries of what's possible with machine intelligence.
+          </p>
+          <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
+            <iframe 
+              width="640" 
+              height="360" 
+              src="https://www.youtube.com/embed/Ijg3eVuZ8A0" 
+              title="ML Animation"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+            <p style={{ maxWidth: '640px', margin: '1rem auto', color: '#fff' }}>
+              I created this animation for a Machine Learning assignment at SJSU. The goal was to illustrate how neural probabilistic models mitigate dimensionality issues and handle unseen words better than traditional n-gram models.
+            </p>
+          </div>
+          <p>
+            My background in IT and computer hardware has deepened my passion for engineering, especially where it intersects with artificial intelligence. I love hands-on creation and have developed a strong interest in robotics. I've completed several Arduino-based projects, including building a mechanical arm to assist with soldering PCB boards. I particularly enjoyed the engineering process, from sketching initial designs and 3D printing components to wiring circuits and programming servo motors. It felt like assembling a complex, rewarding puzzle. I also designed a device that uses an ultrasonic sensor to measure distances, further fueling my curiosity about potential limitless applications of robotics and AI.
+          </p>
+          <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
+            <iframe 
+              src="https://www.youtube.com/embed/1q5wo_WGUrQ" 
+              width="640" 
+              height="360" 
+              style={{ border: 'none', overflow: 'hidden' }} 
+              scrolling="no" 
+              frameBorder="0" 
+              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+              allowFullScreen
+            ></iframe>
+            <p style={{ maxWidth: '640px', margin: '1rem auto', color: '#fff' }}>
+              This was the first prototype of my Arduino-based mechanical arm project. It was designed to assist with soldering tasks and controlled using servo motors and ultrasonic sensors.
+            </p>
+          </div>
+        </div>
+      )
+     }
   ];
 
   return (
     <>
+      <TriangleMesh />
       {selectedProject && (
         <div className="modal-overlay" onClick={() => setSelectedProject(null)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -314,7 +372,7 @@ function App() {
         </div>
       )}
 
-      <div className="bg" />
+      {/* <div className="bg" /> */}
       <nav className="nav">
         {sections.map(section => (
           <Link
