@@ -1,11 +1,10 @@
 {
   "files": {
-    "main.css": "/AshkanNikfarjam.github.io/static/css/main.b5e81703.css",
-    "main.js": "/AshkanNikfarjam.github.io/static/js/main.f5463c0d.js",
+    "main.css": "/AshkanNikfarjam.github.io/static/css/main.97a3d7fd.css",
+    "main.js": "/AshkanNikfarjam.github.io/static/js/main.747d8ccb.js",
     "static/js/453.c11d07f6.chunk.js": "/AshkanNikfarjam.github.io/static/js/453.c11d07f6.chunk.js",
     "static/media/connect4.png": "/AshkanNikfarjam.github.io/static/media/connect4.4409fafae318ecbbe5d6.png",
     "static/media/portpic.jpg": "/AshkanNikfarjam.github.io/static/media/portpic.82a38c9426d08070fdf9.jpg",
-    "static/media/bg.png": "/AshkanNikfarjam.github.io/static/media/bg.2b13053616c00758412f.png",
     "static/media/healthmap.png": "/AshkanNikfarjam.github.io/static/media/healthmap.781b3f58019fd024021c.png",
     "static/media/staircase.jpeg": "/AshkanNikfarjam.github.io/static/media/staircase.0cca809f761dc38970bd.jpeg",
     "static/media/xray.png": "/AshkanNikfarjam.github.io/static/media/xray.6a767d464715dc830007.png",
@@ -13,12 +12,12 @@
     "static/media/germany.jpg": "/AshkanNikfarjam.github.io/static/media/germany.d5814052742a87147b08.jpg",
     "static/media/geneQuest.jpg": "/AshkanNikfarjam.github.io/static/media/geneQuest.821b5fb6fd9c8a43c815.jpg",
     "index.html": "/AshkanNikfarjam.github.io/index.html",
-    "main.b5e81703.css.map": "/AshkanNikfarjam.github.io/static/css/main.b5e81703.css.map",
-    "main.f5463c0d.js.map": "/AshkanNikfarjam.github.io/static/js/main.f5463c0d.js.map",
+    "main.97a3d7fd.css.map": "/AshkanNikfarjam.github.io/static/css/main.97a3d7fd.css.map",
+    "main.747d8ccb.js.map": "/AshkanNikfarjam.github.io/static/js/main.747d8ccb.js.map",
     "453.c11d07f6.chunk.js.map": "/AshkanNikfarjam.github.io/static/js/453.c11d07f6.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b5e81703.css",
-    "static/js/main.f5463c0d.js"
+    "static/css/main.97a3d7fd.css",
+    "static/js/main.747d8ccb.js"
   ]
 }
