@@ -13,7 +13,8 @@ import healthmapIcon from './assets/healthmap.png';
 import ReactMarkdown from 'react-markdown';
 import ImageSlider from './components/imageSlider';
 import WorkExperienceTimeline from './components/workexperience';
-import TriangleMesh from './components/triablemesh'
+// import TriangleMesh from './components/triablemesh'
+import Chatbot from './components/chatbot';
 // import geneScope_md from './projects/GeneScope/GeneScope.md?raw'
 import './App.css';
 
@@ -315,6 +316,7 @@ function App() {
       title: '',
       content: (
         <div class='side-projects'>
+          <h1>Intrests and SideProjects</h1>
           <p>
             I constantly seek out new developments in AI and Machine Learning to sharpen my expertise. As a data scientist and someone who believes in using AI to drive innovation, I’ve honed my skills across various domains, from biomedical research to intelligent systems. Beyond theoretical understanding, I actively explore cutting-edge tools like deep learning frameworks, generative models, and reinforcement learning. I’m particularly drawn to the creative and engineering challenges AI presents—whether it's building intelligent agents, developing real-world applications, or contributing to open-source projects that push the boundaries of what's possible with machine intelligence.
           </p>
@@ -350,6 +352,7 @@ function App() {
               This was the first prototype of my Arduino-based mechanical arm project. It was designed to assist with soldering tasks and controlled using servo motors and ultrasonic sensors.
             </p>
           </div>
+          <Chatbot />
         </div>
       )
      }
@@ -357,7 +360,7 @@ function App() {
 
   return (
     <>
-      <TriangleMesh />
+      {/* <TriangleMesh /> */}
       {selectedProject && (
         <div className="modal-overlay" onClick={() => setSelectedProject(null)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -372,7 +375,7 @@ function App() {
         </div>
       )}
 
-      {/* <div className="bg" /> */}
+      <div className="bg" />
       <nav className="nav">
         {sections.map(section => (
           <Link
