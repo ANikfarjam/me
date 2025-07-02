@@ -196,7 +196,7 @@ function App() {
           I am proficient with both SQL and NoSQL databases (such as Firebase Realtime Database and Firestore) 
           and exceptionally proficient in deploying applications to the cloud, making me a confident and collaborative engineer 
           ready to tackle complex challenges. */}
-          Hi! I’m Ashkan Nikfarjam, a recent Data Science graduate from San Jose State University with a strong foundation in AI-powered solutions, full-stack web development, and interactive data dashboard design. I’m passionate about building intelligent systems—whether it’s machine learning applications, LLM-driven tools, or robotics side projects that explore automation and control. As a classically trained violinist, I also bring a deep sense of discipline, creativity, and structure to my technical work.
+          Hi! I’m Ashkan Nikfarjam, a recent Data Science graduate from San Jose State University with a strong foundation in AI-powered solutions, full-stack web development, and interactive data dashboard design. I’m passionate about building intelligent systems, whether it’s machine learning applications, LLM-driven tools, or robotics side projects that explore automation and control. As a classically trained violinist, I also bring a deep sense of discipline, creativity, and structure to my technical work.
         </p>
         </div>
       )
@@ -213,42 +213,42 @@ function App() {
             {[
               {
                 name: 'GeneScope',
-                description: 'A deep learning platform for biomedical research that classifies breast cancer stages using multimodal data and integrates an LLM-powered chatbot.',
+                description: 'A deep learning platform for biomedical research that classifies breast cancer stages using multimodal model and integrates an LLM-powered chatbot.',
                 image: genescope_icon,
                 imageGallery: geneScopeImages,
                 detailedDescription:  <ReactMarkdown>{geneScopeContent}</ReactMarkdown>
               },
               {
                 name: 'X-ray-Image_classification_CNNRNN',
-                description: 'An X-ray image classifier using a CNN-RNN hybrid model to detect and classify bone fractures.',
+                description: 'An X-ray image classifier built on a CNN-RNN hybrid model that detects and classifies bone fractures, while also identifying the type of bone (e.g., hand, leg).',
                 image: xrayImg,
                 imageGallery: xrayImages,
                 detailedDescription: <ReactMarkdown>{xrayContent}</ReactMarkdown>
               },
               {
                 name: 'StairCase',
-                description: 'A cross-platform multiplayer game with AI-driven trivia and hangman mini-games using LangChain agents.',
+                description: 'A cross-platform multiplayer game with LLM-driven trivia and hangman mini-games using LangChain agents.',
                 image: staircaseImg,
                 imageGallery:stairCaseImages,
                 detailedDescription: <ReactMarkdown>{stairCaseContent}</ReactMarkdown>
               },
               {
                 name: 'GeneQuest',
-                description: 'A Genomic reasearch web app that unify BLAST, GenBank search, and phylogenetic tools into one simple interface',
+                description: 'A genomic research web app that unifies BLAST, GenBank search, and phylogenetic tools into one simple interface.',
                 image: geneQuestIcon,
                 imageGallery:genequestImges,
                 detailedDescription: <ReactMarkdown>{geneQuestContent}</ReactMarkdown>
               },
               {
                 name: 'MokeTheStock',
-                description: 'A full-stack web application built to simulate real-world trading.',
+                description: 'A full-stack web application built to simulate real-world trading and create stock portfolios.',
                 image: stockMarketLogo,
                 imageGallery:stockMarketImges,
                 detailedDescription: <ReactMarkdown>{stockMarketContent}</ReactMarkdown>
               },
               {
                 name: 'CityPlus(Germany)',
-                description: 'A  recommendation web app design to recommend a city in Germany tailored to the users preferances.',
+                description: 'An AI-powered web application that recommends cities in Germany based on the user\'s personal preferences.',
                 image: germanyIcon,
                 imageGallery:germanImges,
                 detailedDescription: <ReactMarkdown>{gemanCityContent}</ReactMarkdown>
@@ -262,7 +262,7 @@ function App() {
               },
               {
                 name: 'HealthMap',
-                description: 'An intractive Data Visualization dashboard, anlysing most common raspitory desease across the US.',
+                description: 'An interactive data visualization dashboard analyzing the most common respiratory diseases across the U.S.',
                 image: healthmapIcon,
                 imageGallery:healthmapImeges,
                 detailedDescription: <ReactMarkdown>{healthMapContent}</ReactMarkdown>
@@ -312,7 +312,7 @@ function App() {
       )
     },
      {
-      id: 'Intrests and side projects',
+      id: 'Interests and Side Projects',
       title: '',
       content: (
         <div class='side-projects'>
@@ -331,7 +331,7 @@ function App() {
               allowFullScreen
             ></iframe>
             <p style={{ maxWidth: '640px', margin: '1rem auto', color: '#fff' }}>
-              I created this animation for a Machine Learning assignment at SJSU. The goal was to illustrate how neural probabilistic models mitigate dimensionality issues and handle unseen words better than traditional n-gram models.
+              I created this animation for a Machine Learning assignment at SJSU to illustrate how neural probabilistic models address the curse of dimensionality and handle unseen words more effectively than traditional n-gram models.
             </p>
           </div>
           <p>
@@ -349,7 +349,7 @@ function App() {
               allowFullScreen
             ></iframe>
             <p style={{ maxWidth: '640px', margin: '1rem auto', color: '#fff' }}>
-              This was the first prototype of my Arduino-based mechanical arm project. It was designed to assist with soldering tasks and controlled using servo motors and ultrasonic sensors.
+              This was the first prototype of my Arduino-based mechanical arm project. It was designed to assist with soldering tasks and controlled using servo motors and other components.
             </p>
           </div>
           <Chatbot />

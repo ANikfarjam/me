@@ -17,7 +17,8 @@ const Chatbot = () => {
 
     try {
       const response = await axios.post("http://0.0.0.0:8000/query", {
-        query: input,
+        text: input,  
+        top_k: 10      
       });
 
       const botMessage = { sender: "bot", text: response.data.response || "No response." };
