@@ -88,7 +88,7 @@ const experiences = [
     ]
   },
     {
-    role: "Team Leade",
+    role: "Team Leader",
     company: "Just Energy",
     location: "San Jose, CA",
     date: "Apr 2017 - Jun 2018",
