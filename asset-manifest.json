@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/AshkanNikfarjam.github.io/static/css/main.019e7d98.css",
-    "main.js": "/AshkanNikfarjam.github.io/static/js/main.9618cb98.js",
+    "main.js": "/AshkanNikfarjam.github.io/static/js/main.eefca9fc.js",
     "static/js/453.c11d07f6.chunk.js": "/AshkanNikfarjam.github.io/static/js/453.c11d07f6.chunk.js",
     "static/media/connect4.png": "/AshkanNikfarjam.github.io/static/media/connect4.4409fafae318ecbbe5d6.png",
     "static/media/portpic.jpg": "/AshkanNikfarjam.github.io/static/media/portpic.82a38c9426d08070fdf9.jpg",
@@ -14,11 +14,11 @@
     "static/media/geneQuest.jpg": "/AshkanNikfarjam.github.io/static/media/geneQuest.821b5fb6fd9c8a43c815.jpg",
     "index.html": "/AshkanNikfarjam.github.io/index.html",
     "main.019e7d98.css.map": "/AshkanNikfarjam.github.io/static/css/main.019e7d98.css.map",
-    "main.9618cb98.js.map": "/AshkanNikfarjam.github.io/static/js/main.9618cb98.js.map",
+    "main.eefca9fc.js.map": "/AshkanNikfarjam.github.io/static/js/main.eefca9fc.js.map",
     "453.c11d07f6.chunk.js.map": "/AshkanNikfarjam.github.io/static/js/453.c11d07f6.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.019e7d98.css",
-    "static/js/main.9618cb98.js"
+    "static/js/main.eefca9fc.js"
   ]
 }
