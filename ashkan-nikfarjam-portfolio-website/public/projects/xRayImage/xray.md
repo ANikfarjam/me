@@ -65,9 +65,7 @@ Using sparse_categorical_crossentropy as the loss function, Keras Tuner searched
 # Model Comparisons
 Four models were benchmarked:
 
-| Model | Accuracy | Notes |
-|-------|-------|-------|
-| CNN-RNN + NAS (Main) | 88.5% |	Best-performing model with balanced loss |
-| CNN + NAS (no RNN) | 87% | Slightly lower accuracy, higher loss |
-| Traditional CNN (baseline) | 51.7% |	Underperformed due to lack of temporal data |
-| Random Forest + SearchCV | 77% |	Efficient on smaller subsets only |
+* CNN-RNN + NAS (Main) -> 88.5% accuracy ->	Best-performing model with balanced loss 
+* CNN + NAS (no RNN) -> 87% -> Slightly lower accuracy, higher loss 
+* Traditional CNN (baseline) -> 51.7% ->	Underperformed due to lack of temporal data 
+* Random Forest + SearchCV -> 77% ->	Efficient on smaller subsets only 

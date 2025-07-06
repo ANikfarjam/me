@@ -13,11 +13,8 @@ Hangman – AI-curated word games with dynamic hints
 
 These challenges keep gameplay engaging while allowing two users to compete from separate devices with real-time updates and animations.
 
-![Gameplay](./media/game.png)
 ## LangChain-Powered Mini-Games
 One of the core innovations is the use of LangChain agents to dynamically generate trivia and hangman questions. This allowed us to avoid hardcoding questions and instead rely on natural language generation using Mistral AI. Each mini-game interaction is context-aware, personalized, and processed through Flask API endpoints, providing variety and depth to every playthrough.
-
-![LangChain](./media/langchain.png)
 
 
 ## Architecture & Technology
@@ -37,8 +34,7 @@ Frontend Web App: Built in ReactJS and deployed on Vercel to allow user registra
 Game Backend: Dockerized Flask application hosted via NorthFlank, auto-synced from DockerHub for easy CI/CD.
 
 Cross-Platform Client Builds: Packaged for Windows and Apple M-series devices.
-![Front](./media/landing.png)
-![Front Log in](./media/login.png)
+
 ## Social & Multiplayer Features
 Users can:
 
@@ -49,7 +45,7 @@ Add friends and track online/offline status in real time
 Invite others to a game session and sync party lists across clients
 
 Track wins, stats, and user information in Firestore documents
-![menu](./media/menue.png)
+
 ## Testing & Validation
 Game logic was rigorously tested using:
 
