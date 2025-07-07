@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Component } from 'react';
-import { FaGithub, FaLinkedin, FaEnvelope, FaPhoneAlt } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaEnvelope, FaExternalLinkAlt } from 'react-icons/fa';
+import { IoDocuments } from "react-icons/io5";
 import { Link, Element } from 'react-scroll';
 import portfolio_img from './assets/portpic.jpg';
 import genescope_icon from './assets/genescope.ico';
@@ -19,6 +20,9 @@ import Chatbot from './components/chatbot';
 import './App.css';
 
 function App() {
+  useEffect(() => {
+    document.title = 'A.Nikfarjam';
+  }, []);
   // for selectin specific project
   const [selectedProject, setSelectedProject] = useState(null);
 
@@ -166,8 +170,17 @@ function App() {
                   <FaEnvelope size={24} />
                   <span>ashkan_nikfarjam@yahoo.com</span>
                 </div>
+                <a
+                  href="https://raw.githubusercontent.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/backend/pinecone_local/Docs/resume/_Ashkan%20Nikfajram%20SW%2025.pdf"
+                  download="Ashkan_Nikfarjam_Resume.pdf"
+                  className="contact-item"
+                >
+                  <IoDocuments size={24} />
+                  <span>My Resume</span>
+                </a>
                 {/* <div className="contact-item">
                   <FaPhoneAlt size={24} />
+                  IoDocuments
                   <span>+1 (408) 843-0173</span>
                 </div> */}
               </div>
@@ -213,6 +226,7 @@ function App() {
             {[
               {
                 name: 'GeneScope',
+                links: ['https://gene-scope-liard.vercel.app/', 'https://github.com/ANikfarjam/GeneScope'],
                 description: 'A deep learning platform for biomedical research that classifies breast cancer stages using multimodal model and integrates an LLM-powered chatbot.',
                 image: genescope_icon,
                 imageGallery: geneScopeImages,
@@ -220,6 +234,7 @@ function App() {
               },
               {
                 name: 'X-ray-Image_classification_CNNRNN',
+                links:['https://github.com/ANikfarjam/X-ray-Image_classification_CNNRNN'],
                 description: 'An X-ray image classifier built on a CNN-RNN hybrid model that detects and classifies bone fractures, while also identifying the type of bone (e.g., hand, leg).',
                 image: xrayImg,
                 imageGallery: xrayImages,
@@ -227,6 +242,7 @@ function App() {
               },
               {
                 name: 'StairCase',
+                links:['https://stair-case.vercel.app/','https://github.com/ANikfarjam/StairCase'],
                 description: 'A cross-platform multiplayer game with LLM-driven trivia and hangman mini-games using LangChain agents.',
                 image: staircaseImg,
                 imageGallery:stairCaseImages,
@@ -234,6 +250,7 @@ function App() {
               },
               {
                 name: 'GeneQuest',
+                links:['https://github.com/ANikfarjam/GeneQuest'],
                 description: 'A genomic research web app that unifies BLAST, GenBank search, and phylogenetic tools into one simple interface.',
                 image: geneQuestIcon,
                 imageGallery:genequestImges,
@@ -241,6 +258,7 @@ function App() {
               },
               {
                 name: 'MokeTheStock',
+                links:['https://github.com/ryanfernald/Stock-Market-Management-System'],
                 description: 'A full-stack web application built to simulate real-world trading and create stock portfolios.',
                 image: stockMarketLogo,
                 imageGallery:stockMarketImges,
@@ -248,6 +266,7 @@ function App() {
               },
               {
                 name: 'CityPlus(Germany)',
+                links:['https://github.com/ANikfarjam/Germany-City-Plus-Kmean-Clustering-ML-Learing-and-Rulebase-AI'],
                 description: 'An AI-powered web application that recommends cities in Germany based on the user\'s personal preferences.',
                 image: germanyIcon,
                 imageGallery:germanImges,
@@ -255,6 +274,7 @@ function App() {
               },
               {
                 name: 'Connect4',
+                links:['https://github.com/ANikfarjam/Connect4'],
                 description: 'A single player Connect4 game where players play against an AI agent.',
                 image: connect4Icon,
                 imageGallery:connect4Imges,
@@ -262,6 +282,7 @@ function App() {
               },
               {
                 name: 'HealthMap',
+                links:['https://github.com/ANikfarjam/HealthMap'],
                 description: 'An interactive data visualization dashboard analyzing the most common respiratory diseases across the U.S.',
                 image: healthmapIcon,
                 imageGallery:healthmapImeges,
@@ -274,6 +295,22 @@ function App() {
                   <img src={project.image} alt={project.name} className="project-img" />
                 </div>
                 <h3>{project.name.replace(/_/g, ' ')}</h3>
+                <div className="project-links">
+                  {project.links.map((link) => (
+                    <a 
+                      key={link} 
+                      href={link} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="link-icon"
+                    >
+                      {link.includes('github.com')
+                        ? <FaGithub size={18} />
+                        : <FaExternalLinkAlt size={18} />
+                      }
+                    </a>
+                  ))}
+                </div>
                 <p>{project.description}</p>
                 <button onClick={() => setSelectedProject(project)}>View Details</button>
               </div>
