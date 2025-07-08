@@ -36,7 +36,7 @@ function App() {
   // stairCase project
   const [stairCaseContent, setstairCaseContent] = useState('');
   useEffect(() => {
-    fetch(`${process.env.PUBLIC_URL}/projects/StairCase/StairCase.md`)
+    fetch(`${process.env.PUBLIC_URL}/projects/StairCase/stairCase.md`)
       .then(res => res.text())
       .then(setstairCaseContent);
   }, []);
@@ -83,7 +83,7 @@ function App() {
   //heathmap
   const [healthMapContent, sethealthMapContent] = useState('');
   useEffect(() => {
-    fetch(`${process.env.PUBLIC_URL}/projects/healthmap/healthmap.md`)
+    fetch(`${process.env.PUBLIC_URL}/projects/healthMap/healthmap.md`)
       .then(res => res.text())
       .then(sethealthMapContent);
   }, []);
