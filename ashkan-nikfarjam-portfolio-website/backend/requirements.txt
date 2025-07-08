@@ -1,0 +1,29 @@
+# FastAPI web framework and its Pydantic core
+fastapi
+pydantic
+
+# ASGI server
+uvicorn
+
+# Environment‐variable loader
+python-dotenv
+
+# Pinecone client
+pinecone
+
+# LangChain core + community loaders
+langchain
+langchain-community
+
+# Embedding library you’re using
+fastembed
+
+# Natural‐language toolkit (for nltk.download)
+nltk
+
+# HTTP clients
+requests
+httpx
+
+# Numerical computing
+numpy

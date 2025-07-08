@@ -16,7 +16,7 @@ const Chatbot = () => {
     setMessages((prev) => [...prev, userMessage]);
 
     try {
-      const response = await axios.post("http://0.0.0.0:8000/query", {
+      const response = await axios.post("https://portfolio-latest-vi63.onrender.com/query", {
         text: input,  
         top_k: 10      
       });

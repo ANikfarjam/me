@@ -157,7 +157,7 @@ function App() {
               <h1>Ashkan Nikfarjam</h1>
               <ul>
                 <li>Data Scientist and Full Stack Developer.</li>
-                <li>San Jose State University, Class of 2025</li>
+                <li>San Jose State University (Data Science), Class of 2025</li>
               </ul>
               <div className="contact-icons">
                 <a href="https://github.com/ANikfarjam" target="_blank" rel="noopener noreferrer">
@@ -202,14 +202,9 @@ function App() {
             About me
           </h1>
           <p>
-          {/* Hi! Im Ashkan Nikfarjam, a recent Data Science graduate from San Jose State University who specializes in building AI-powered solutions and orchestrating large language models (LLMs). 
-          With a strong foundation in AI powered solutions, full-stack web development, interactive data dashboard design, and cloud deployment to create innovative, data-driven applications. 
-          My portfolio highlights include GeneScope (a deep learning and multimodal AI platform for biomedical research featuring an LLM-powered chatbot built with LangChain and a Pinecone vector database), StairCase (a cross platform multiplyer game with AI-driven trivia and hangman mini-games leveraging LangChain agents), stock market virtual trading platform 
-          that showcases my full-stack development and real-time system integration skills. 
-          I am proficient with both SQL and NoSQL databases (such as Firebase Realtime Database and Firestore) 
-          and exceptionally proficient in deploying applications to the cloud, making me a confident and collaborative engineer 
-          ready to tackle complex challenges. */}
-          Hi! I’m Ashkan Nikfarjam, a recent Data Science graduate from San Jose State University with a strong foundation in AI-powered solutions, full-stack web development, and interactive data dashboard design. I’m passionate about building intelligent systems, whether it’s machine learning applications, LLM-driven tools, or robotics side projects that explore automation and control. As a classically trained violinist, I also bring a deep sense of discipline, creativity, and structure to my technical work.
+          Hi! I’m Ashkan Nikfarjam, a recent Data Science graduate from San Jose State University with a strong foundation in AI-powered solutions, full-stack web development, and interactive data dashboard design. 
+          I’m passionate about building intelligent systems, whether they’re machine learning applications, LLM-driven tools, or robotics side projects that explore automation and control.
+          As a classically trained violinist, I also bring a deep sense of discipline, creativity, and structure to my technical work.
         </p>
         </div>
       )
