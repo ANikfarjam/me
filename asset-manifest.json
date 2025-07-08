@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/AshkanNikfarjam.github.io/static/css/main.a29e9272.css",
-    "main.js": "/AshkanNikfarjam.github.io/static/js/main.8014b7ca.js",
-    "static/js/453.c11d07f6.chunk.js": "/AshkanNikfarjam.github.io/static/js/453.c11d07f6.chunk.js",
-    "static/media/connect4.png": "/AshkanNikfarjam.github.io/static/media/connect4.4409fafae318ecbbe5d6.png",
-    "static/media/portpic.jpg": "/AshkanNikfarjam.github.io/static/media/portpic.82a38c9426d08070fdf9.jpg",
-    "static/media/healthmap.png": "/AshkanNikfarjam.github.io/static/media/healthmap.781b3f58019fd024021c.png",
-    "static/media/staircase.jpeg": "/AshkanNikfarjam.github.io/static/media/staircase.0cca809f761dc38970bd.jpeg",
-    "static/media/xray.png": "/AshkanNikfarjam.github.io/static/media/xray.6a767d464715dc830007.png",
-    "static/media/bg3.jpg": "/AshkanNikfarjam.github.io/static/media/bg3.4f4f68a20fa3b659c3db.jpg",
-    "static/media/genescope.ico": "/AshkanNikfarjam.github.io/static/media/genescope.a8bea3d2936ed8ef27c4.ico",
-    "static/media/germany.jpg": "/AshkanNikfarjam.github.io/static/media/germany.d5814052742a87147b08.jpg",
-    "static/media/geneQuest.jpg": "/AshkanNikfarjam.github.io/static/media/geneQuest.821b5fb6fd9c8a43c815.jpg",
-    "index.html": "/AshkanNikfarjam.github.io/index.html",
-    "main.a29e9272.css.map": "/AshkanNikfarjam.github.io/static/css/main.a29e9272.css.map",
-    "main.8014b7ca.js.map": "/AshkanNikfarjam.github.io/static/js/main.8014b7ca.js.map",
-    "453.c11d07f6.chunk.js.map": "/AshkanNikfarjam.github.io/static/js/453.c11d07f6.chunk.js.map"
+    "main.css": "/me/static/css/main.ecf42d8d.css",
+    "main.js": "/me/static/js/main.fd01908e.js",
+    "static/js/453.c11d07f6.chunk.js": "/me/static/js/453.c11d07f6.chunk.js",
+    "static/media/connect4.png": "/me/static/media/connect4.4409fafae318ecbbe5d6.png",
+    "static/media/portpic.jpg": "/me/static/media/portpic.82a38c9426d08070fdf9.jpg",
+    "static/media/healthmap.png": "/me/static/media/healthmap.781b3f58019fd024021c.png",
+    "static/media/staircase.jpeg": "/me/static/media/staircase.0cca809f761dc38970bd.jpeg",
+    "static/media/xray.png": "/me/static/media/xray.6a767d464715dc830007.png",
+    "static/media/bg3.jpg": "/me/static/media/bg3.4f4f68a20fa3b659c3db.jpg",
+    "static/media/genescope.ico": "/me/static/media/genescope.a8bea3d2936ed8ef27c4.ico",
+    "static/media/germany.jpg": "/me/static/media/germany.d5814052742a87147b08.jpg",
+    "static/media/geneQuest.jpg": "/me/static/media/geneQuest.821b5fb6fd9c8a43c815.jpg",
+    "index.html": "/me/index.html",
+    "main.ecf42d8d.css.map": "/me/static/css/main.ecf42d8d.css.map",
+    "main.fd01908e.js.map": "/me/static/js/main.fd01908e.js.map",
+    "453.c11d07f6.chunk.js.map": "/me/static/js/453.c11d07f6.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a29e9272.css",
-    "static/js/main.8014b7ca.js"
+    "static/css/main.ecf42d8d.css",
+    "static/js/main.fd01908e.js"
   ]
 }
