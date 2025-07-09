@@ -17,7 +17,7 @@ docker buildx build \
 
 if [ $? -eq 0 ]; then
   echo -e "\033[0;32m✅ Image pushed successfully to Docker Hub:\033[0m"
-  echo -e "\033[1;36mhttps://hub.docker.com/r/anikfarjam/genescope_marimo/tags\033[0m"
+  echo -e "\033[1;36mhttps://hub.docker.com/r/anikfarjam/porfolio/tags\033[0m"
 else
   echo -e "\033[0;31m Build or push failed.\033[0m"
   exit 1

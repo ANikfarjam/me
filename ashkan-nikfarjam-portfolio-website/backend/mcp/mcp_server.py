@@ -161,13 +161,52 @@ async def generate_content(request: QueryRequest):
             detail=f"Internal server error: {str(e)}"
         )
 
+async def get_general_info(request: QueryRequest) -> List[DocumentResponse]:
+    try:
+        indexes = db.list_indexes()
+        combined_results = []
+
+        query_embedding = get_query_embedding(request.text)
+
+        for index_name in indexes:
+            try:
+                results = db.query_index(
+                    index_name=index_name,
+                    query_embedding=query_embedding,
+                    top_k=request.top_k
+                )
+                if results:
+                    combined_results.extend([
+                        DocumentResponse(
+                            id=result.id,
+                            text=result.metadata["text"],
+                            source=result.metadata["source"],
+                            score=result.score
+                        )
+                        for result in results
+                    ])
+            except Exception as e:
+                print(f"Error querying index '{index_name}': {e}")
+                continue
+
+        if not combined_results:
+            raise HTTPException(status_code=404, detail="No relevant documents found.")
+        
+        return combined_results
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error fetching general info: {str(e)}")
+
+
 async def query_documents(request: QueryRequest) -> List[DocumentResponse]:
     """Handle document queries with improved error handling"""
     try:
         # Step 1: Determine category
         category_prompt = (
             f"Classify this query into one category: "
-            f"[education, projects, workexperience, resume]. "
+            f"[education, projects, workexperience, resume, general info]. "
             f"Query: {request.text}. "
             f"Just return the name of the category, nothing else."
         )
@@ -181,7 +220,9 @@ async def query_documents(request: QueryRequest) -> List[DocumentResponse]:
                 status_code=500,
                 detail="Failed to classify query category"
             )
-
+        if category == 'general info':
+            # Return the response from get_general_info directly
+            return await get_general_info(request=request)
         # Validate category exists in Pinecone
         if category not in db.list_indexes():
             raise HTTPException(
