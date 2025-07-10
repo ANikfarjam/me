@@ -3,7 +3,7 @@
 The Stock Market Management System is a full-stack web application built to simulate real-world trading in a safe, educational environment. It was designed to help beginner investors understand stock market dynamics without financial risk. The platform uses real S&P 500 data, enabling users to virtually buy, sell, and analyze stocks, while also providing portfolio tracking, analytics, and stock-related news updates.
 
 ## Project Objective
-The goal of this application was to create a simulation-based learning tool for stock trading, catering especially to those without prior investment experience. The platform allows users to:
+The goal of this application is to create a simulation-based learning tool for stock trading, catering especially to those without prior investment experience. The platform allows users to:
 
 * Practice stock trading using virtual currency.
 
@@ -20,11 +20,11 @@ The system was designed with a modular and scalable architecture, ensuring flexi
 
 **Frontend**: Built with React (JavaScript), providing a responsive and interactive user experience. Pages include the landing screen, user dashboards, stock buying/selling pages, and admin panels.
 
-**Backend**: Flask (Python) acts as the main API layer, handling user requests, authentication routing, and all database interactions.
+**Backend**: Flask (Python) acts as the main API layer, handling user requests, authentication, routing, and all database interactions.
 
 **Database**: MySQL, structured with a BCNF-normalized schema to eliminate redundancy and preserve data integrity. Firebase’s Realtime Database was used for NoSQL support ticket management.
 
-**Authentication**: Firebase Authentication integrated with both email/password and Google OAuth methods.
+**Authentication**: Firebase Authentication integrated with both email/password and Google Auth methods.
 
 **APIs**: Stock price data is fetched via scripts using Yahoo Finance and Finnhub APIs, handled by scheduled fetch operations and routed insertion methods.
 
@@ -32,7 +32,7 @@ The architecture follows a decoupled model: React sends HTTP requests to Flask e
 
 ## Core Features and Functionalities
 ### Landing Page and Market Visualization
-The homepage displays interactive charts for major indices (S&P 500, NASDAQ, Dow Jones) and selected companies (e.g., Apple). Users can adjust timeframes (up to 1 year) and switch between different indices. This feature helps users familiarize themselves with real market behavior and recent trends.
+The homepage displays interactive charts for major indices (S&P 500, NASDAQ, Dow Jones) and selected companies (e.g., Apple). Users can adjust timeframes (up to 1 year) and switch between different indices. This feature helps users become familiar with real market behavior and recent trends.
 
 ### News Aggregator
 The news page displays financial headlines sorted by categories such as business, science, healthcare, and technology. Articles can be searched by keyword or company name. Unauthenticated users can still browse news, while logged-in users can save articles for later reference.
@@ -88,7 +88,7 @@ Users can sell shares, which updates the database and cash balance accordingly.
 
 The admin interface includes tools for:
 
-Monitoring storage consumption of each SQL table.
+Monitoring the storage consumption of each SQL table.
 
 Inserting or deleting records across any table through structured forms.
 

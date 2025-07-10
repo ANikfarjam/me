@@ -214,15 +214,15 @@ function App() {
       content: (
         <div className='projects-container'>
           <h1>My Projects</h1>
-          <p className="projects-intro">
+          {/* <p className="projects-intro">
             Here is a collection of my projects showcasing my skills in data science, AI, and full-stack development.
-          </p>
+          </p> */}
           <div className="project-cards">
             {[
               {
                 name: 'GeneScope',
                 links: ['https://gene-scope-liard.vercel.app/', 'https://github.com/ANikfarjam/GeneScope'],
-                description: 'A deep learning platform for biomedical research that classifies breast cancer stages using multimodal model and integrates an LLM-powered chatbot.',
+                description: 'A deep learning platform for biomedical research that classifies patient clinical and genomic data into breast cancer stages using a multimodal model and integrates an LLM-powered chatbot.',
                 image: genescope_icon,
                 imageGallery: geneScopeImages,
                 detailedDescription:  <ReactMarkdown>{geneScopeContent}</ReactMarkdown>
