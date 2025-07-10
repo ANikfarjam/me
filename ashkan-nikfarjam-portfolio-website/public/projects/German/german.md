@@ -1,5 +1,5 @@
 # Germany City+: AI-Powered Travel & Relocation Recommender
-Germany City+ is an intelligent, data-driven web application designed to help users—whether tourists, students, or professionals—discover optimal German cities based on their personal goals. Through data visualization, machine learning, and hybrid AI agents, the app demystifies Germany’s cultural and economic landscape while providing personalized travel and relocation recommendations.
+Germany City+ is an intelligent, data-driven web application designed to help users—whether tourists, students, or professionals discover optimal German cities based on their personal goals. Through data visualization, machine learning, and hybrid AI agents, the app explores Germany’s cultural and economic landscape while providing personalized travel and relocation recommendations.
 
 ## Project Objective
 
@@ -12,11 +12,11 @@ This application guides users by:
 * Providing smart recommendations tailored to the user's goals.
 
 ## Stack & Architecture
-Frontend: Dash (React + Plotly), built with a navbar-routing system and interactive graphs
+Frontend: Dash, built with a navbar-routing system and interactive graphs
 
 Backend: Python scripts (KMeans, AI logic), Flask for routing
 
-Data: OECD indicators, scraped rental data, bootstrap-resampled to scale up to 15,000+ rows
+Data: OECD indicators, scraped rental data, bootstrap-resampled data for better classification
 
 ML Model: K-Means clustering for grouping similar states (optimal K=3)
 
@@ -31,7 +31,7 @@ ML Explorer: Inertia plots and cluster visualizations
 
 Recommendation Engine:
 
-User fills a form describing their priorities (affordability, jobs, education, etc.)
+User fills out a form describing their priorities (affordability, jobs, education, etc.)
 
 Agent identifies matching clusters, retrieves relevant cities
 
