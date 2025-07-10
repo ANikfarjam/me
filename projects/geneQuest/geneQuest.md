@@ -1,5 +1,5 @@
 # GeneQuest: Integrated Bioinformatics Analysis Platform
-GeneQuest is a full-stack web application built to simplify and unify core bioinformatics tasks such as GenBank searches, sequence alignment via BLAST and MegaBLAST, conservative region identification, and phylogenetic tree construction. Designed for accessibility and scalability, GeneQuest addresses workflow fragmentation and technical barriers that often hinder researchers and students in genomics analysis.
+GeneQuest is a full-stack web application built to simplify and unify core bioinformatics tasks such as GenBank searches, sequence alignment via BLAST and MegaBLAST, conserved region identification, and phylogenetic tree construction. Designed for accessibility and scalability, GeneQuest addresses workflow fragmentation and technical barriers that often hinder researchers and students in genomics analysis.
 
 ## Project Objective
 The aim of GeneQuest is to streamline complex bioinformatics workflows into a unified platform. Traditional approaches rely on disjointed tools like NCBI BLAST, ClustalOmega, and GenBank interfaces, which require separate interactions, file handling, and expertise. GeneQuest simplifies this by offering an integrated, web-based environment that allows users to:
@@ -8,7 +8,7 @@ The aim of GeneQuest is to streamline complex bioinformatics workflows into a un
 
 * Perform sequence alignment using BLAST and MegaBLAST
 
-* Visualize multiple sequence alignments and mutations
+* Visualize multiple sequence alignments and identify mutations
 
 * Construct phylogenetic trees to assess evolutionary relationships
 
@@ -45,7 +45,7 @@ Retrieves metadata and raw sequences in FASTA format.
 
 Enables sequence downloads for offline analysis.
 
-Implements frontend caching using localStorage to improve performance on repeated queries.
+Implements frontend caching to improve performance on repeated queries.
 
 ### BLAST and MegaBLAST Alignment
 Supports two modes:
@@ -58,7 +58,7 @@ Results include:
 
 Hit IDs, descriptions, E-values, alignment scores
 
-Visual alignment viewer to explore indels, mutations, and conserved regions
+A visual alignment viewer to explore indels, mutations, and conserved regions
 
 Includes FASTA file upload for large-scale alignments.
 
