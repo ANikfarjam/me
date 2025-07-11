@@ -20,14 +20,14 @@ const experiences = [
         duration: "3 months",
         tasks: [
           "Assisted staff and students with their iOS or Mac devices to ensure flawless performance.",
-            "Provided iPad support to students, including a dedicated support station twice a week for walk-ins. Assisted students with troubleshooting, locating misplaced devices, and offering guidance, as well as assisting teachers during walk-ins.",
-            "Updated backup power supply units (PSUs) in the district’s IDFs and MDFs to minimize or prevent downtime during power outages.",
-            "Reconfigured VLANs for certain wireless access points (WAPs), enhancing network performance and connectivity.",
-            "Utilized iBoss and Airwatch VMware to push restrictions and filtering settings required by the school district, install necessary applications on students’ iOS devices, and manage devices efficiently.",
-            "Operated in a Mac-dominant environment, managing OS X packages through Munki server and repository.",
-            "Developed backup and network drive mapping bash scripts to reduce manual workload.",
-            "Created a dashboard for the IT department using JavaScript and HTML, consolidating various resources in one location to improve efficiency.",
-            "Created Python scripts to update and manipulate Cisco network configuration files, establish SSH connections, and push configuration files to Cisco networking equipment."
+          "Provided iPad support to students through a dedicated walk-in support station held twice weekly. Assisted students with troubleshooting, locating misplaced devices, and offered guidance to both students and teachers during visits.",
+          "Updated backup power supply units (PSUs) in the district’s IDFs and MDFs to minimize or prevent downtime during power outages.",
+          "Reconfigured VLANs for certain wireless access points (WAPs), enhancing network performance and connectivity.",
+          "Utilized iBoss and VMware AirWatch to push restrictions and filtering settings required by the school district, install necessary applications on students’ iOS devices, and manage devices efficiently.",
+          "Operated in a Mac-dominant environment, managing OS X packages through Munki server and repository.",
+          "Developed backup and network drive mapping bash scripts to reduce manual workload.",
+          "Created a dashboard for the IT department using JavaScript and HTML, consolidating various resources in one location to improve efficiency.",
+          "Created Python scripts to update and manipulate Cisco network configuration files, establish SSH connections, and push configuration files to Cisco networking equipment."
         ]
       },
       {
@@ -46,7 +46,7 @@ const experiences = [
         ]
       },
       {
-        name: "MacGraph Rental Corp, Livermoore, CA",
+        name: "MacGraph Rental Corp, Livermore, CA",
         industry: "Industrial Engineering",
         duration: "4 months",
         tasks: [
@@ -56,18 +56,18 @@ const experiences = [
             "Utilized an outdated backup server to write data to optical tapes.",
             "Coordinated with a third-party company for off-site tape backups, overseeing the process.",
             "Monitored backup tasks, created backup schedules, and maintained servers experiencing security-related backup interruptions caused by permission or firewall conflicts.",
-            "Successfully introduced and advocated for adopting cloud computing solutions such as AWS and Azure, emphasizing their cost-effectiveness and reliability."
+            "Successfully introduced and advocated for the adoption of cloud computing solutions such as AWS and Azure, emphasizing their cost-effectiveness and reliability."
         ]
       },
       {
-        name: "Arnold & Porter Law Firm, San Fransisco, CA",
+        name: "Arnold & Porter Law Firm, San Francisco, CA",
         industry: "Law Firm",
         duration: "3 months",
         tasks:[
             "Assisted with operating system migration from Windows 7 to Windows 10.",
             "Provided IT support for a San Francisco office of 600 employees, primarily handling Microsoft Office issues such as add-ons, email signatures, Outlook settings, and other MS Office-related tasks.",
             "Performed system imaging and data migration to ensure seamless transitions during upgrades.",
-            "Set up and troubleshooted AV conference room equipment to support effective virtual meetings, and coordinated meetings between offices using Cisco Webex console.",
+            "Set up and troubleshot AV conference room equipment to support effective virtual meetings, and coordinated meetings between offices using Cisco Webex console.",
             "Implemented data encryption on users’ computers to enhance security protocols.",
             "Managed Active Directory and group policies to control user access and permissions based on managerial approvals.",
             "Configured and troubleshooted VPN connections on attorney computers to ensure secure remote access.",
@@ -93,7 +93,7 @@ const experiences = [
     location: "San Jose, CA",
     date: "Apr 2017 - Jun 2018",
     details: [
-        "Started as a Sales Representative. In a matter of 3 months I built my way up to Team Lead Position. I managed a team of five sales reps. I achieved the Top Sales Award of the month for months of October, November, and December of 2017. Also broke the sales record in the company by 25 sales in one day."
+        "Started as a Sales Representative and was promoted to Team Lead within three months. I managed a team of five sales reps. I achieved the Top Sales Award of the month for months of October, November, and December of 2017. Also set a company sales record with 25 sales in a single day."
     ]
   },
   {
@@ -113,7 +113,7 @@ const experiences = [
     location: "Sunnyvale, CA",
     date: "Mar 2014 - Jan 2016",
     details: [
-        "Managed office of 25 reps. We got recognized as the office of the year 2015"
+        "Managed office of 25 reps. Was recognized as Office of the Year in 2015."
    ]
   }
 ];
