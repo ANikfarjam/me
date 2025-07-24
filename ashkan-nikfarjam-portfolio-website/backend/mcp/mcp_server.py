@@ -129,30 +129,51 @@ async def generate_content(request: QueryRequest):
         documents = await query_documents(request)
         print(f'Found {len(documents)} relevant documents')
         
-        if not documents:
-            return JSONResponse(
-                content={"response": "No relevant documents found"},
-                status_code=404
-            )
-
-        # Step 2: Construct context
-        context = "\n\n".join([doc.text for doc in documents])
+        # Step 2: Construct context and summarize it
+        full_context = "\n\n".join([doc.text for doc in documents])
         
-        # Step 3: Call Mistral
-        prompt = f"""Answer the following question using ONLY the context below.
-        If you don't know the answer, say "I don't have information about that."
-
-        Question: {request.text}
-
+        # Summarize the context to be more concise
+        summarization_prompt = f"""
+        Summarize the following information about Ashkan Nikfarjam, keeping only the details 
+        most relevant to this question: "{request.text}".
+        
+        Be concise but accurate. Include key facts, numbers, and specific achievements when available.
+        Do not add any information not present in the context.
+        
         Context:
-        {context}
-
-        Answer:"""
+        {full_context}
         
-        response = mistral_call(prompt)
+        Concise summary:
+        """
+        
+        summarized_context = mistral_call(summarization_prompt)
+        
+        # Step 3: Generate final response
+        response_prompt = f"""
+        You are a professional assistant for Ashkan Nikfarjam's portfolio. 
+        Answer the question using ONLY the summarized context below.
+        Be professional, concise, and accurate.
+        If the question cannot be answered with the context, say:
+        "I don't have enough information about that aspect of Ashkan's background."
+        
+        Question: {request.text}
+        
+        Context:
+        {summarized_context}
+        
+        Answer:
+        """
+        
+        response = mistral_call(response_prompt)
         return {"response": response.strip()}
 
-    except HTTPException:
+    except HTTPException as he:
+        # Return user-friendly messages for client-facing errors
+        if he.status_code == 400:
+            return JSONResponse(
+                status_code=400,
+                content={"response": "I can only answer questions about Ashkan Nikfarjam's professional background including education, projects, work experience, and resume."}
+            )
         raise
     except Exception as e:
         print("Server error:", traceback.format_exc())
@@ -201,28 +222,40 @@ async def get_general_info(request: QueryRequest) -> List[DocumentResponse]:
 
 
 async def query_documents(request: QueryRequest) -> List[DocumentResponse]:
-    """Handle document queries with improved error handling"""
+    """Handle document queries with improved error handling and off-topic filtering"""
     try:
-        # Step 1: Determine category
+        # Step 1: Determine category with stricter filtering
         category_prompt = (
-            f"Classify this query into one category: "
-            f"[education, projects, workexperience, resume, general info]. "
-            f"Query: {request.text}. "
-            f"Just return the name of the category, nothing else."
+            f"Classify this query into exactly one of these categories ONLY if it's related to Ashkan Nikfarjam's: "
+            f"[education, projects, workexperience, resume, general info]. \n"
+            f"If the question is completely unrelated to Ashkan Nikfarjam, return 'unrelated'.\n"
+            f"Query: {request.text}\n"
+            f"Return ONLY the category name or 'unrelated', nothing else."
         )
         
         try:
             category = mistral_call(category_prompt).lower().strip()
             print(f'Selected category: {category}')
+            
+            # Handle unrelated questions immediately
+            if category == 'unrelated':
+                raise HTTPException(
+                    status_code=400,
+                    detail="I can only answer questions about Ashkan Nikfarjam's education, projects, work experience, and resume."
+                )
+                
+        except HTTPException:
+            raise
         except Exception as e:
             print("Category classification failed:", traceback.format_exc())
             raise HTTPException(
                 status_code=500,
                 detail="Failed to classify query category"
             )
+
         if category == 'general info':
-            # Return the response from get_general_info directly
             return await get_general_info(request=request)
+
         # Validate category exists in Pinecone
         if category not in db.list_indexes():
             raise HTTPException(
@@ -240,6 +273,12 @@ async def query_documents(request: QueryRequest) -> List[DocumentResponse]:
             query_embedding=query_embedding,
             top_k=request.top_k
         )
+
+        if not results:
+            raise HTTPException(
+                status_code=404,
+                detail="No relevant information found about this topic."
+            )
 
         return [
             DocumentResponse(
@@ -259,6 +298,7 @@ async def query_documents(request: QueryRequest) -> List[DocumentResponse]:
             status_code=500,
             detail=f"Document query failed: {str(e)}"
         )
+
 
 if __name__ == "__main__":
     import uvicorn

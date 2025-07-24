@@ -348,7 +348,7 @@ function App() {
       title: '',
       content: (
         <div class='side-projects'>
-          <h1>Intrests and SideProjects</h1>
+          <h1>Interests and Side Projects</h1>
           <p>
             I constantly seek out new developments in AI and Machine Learning to sharpen my expertise. As a data scientist and someone who believes in using AI to drive innovation, I’ve honed my skills across various domains, from biomedical research to intelligent systems. Beyond theoretical understanding, I actively explore cutting-edge tools like deep learning frameworks, generative models, and reinforcement learning. I’m particularly drawn to the creative and engineering challenges AI presents—whether it's building intelligent agents, developing real-world applications, or contributing to open-source projects that push the boundaries of what's possible with machine intelligence.
           </p>
