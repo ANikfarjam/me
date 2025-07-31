@@ -50,53 +50,53 @@ Withdrawals are tracked in the FundsWithdraw table with flags for approval and c
 ### Stock Trading Simulation
 Users can:
 
-Search and view stocks using ticker symbols, company names, or sectors.
+* Search and view stocks using ticker symbols, company names, or sectors.
 
-Buy and sell whole shares (no fractional shares supported).
+* Buy and sell whole shares (no fractional shares supported).
 
-View 1-year historical price charts per stock.
+* View 1-year historical price charts per stock.
 
-Analyze current holdings, including:
+* Analyze current holdings, including:
 
-Weighted average purchase price.
+* Weighted average purchase price.
 
-Percentage and dollar-based profit/loss.
+* Percentage and dollar-based profit/loss.
 
-Trade history with timestamps and transaction details.
+* Trade history with timestamps and transaction details.
 
-Each stock transaction is inserted into the MarketOrder table, while real-time data is fetched by the quick_fetch script.
+* Each stock transaction is inserted into the MarketOrder table, while real-time data is fetched by the quick_fetch script.
 
 ### Portfolio Management
 Holdings are displayed in an interactive table that updates with every transaction. Metrics include:
 
-Ticker symbol
+* Ticker symbol
 
-Quantity owned
+* Quantity owned
 
-Average purchase price
+* Average purchase price
 
-Current price
+* Current price
 
-Percent gain/loss
+* Percent gain/loss
 
-Dollar gain/loss
+* Dollar gain/loss
 
-Users can sell shares, which updates the database and cash balance accordingly.
+* Users can sell shares, which updates the database and cash balance accordingly.
 
 ### Administrative Features
 **Admin Dashboard**
 
 The admin interface includes tools for:
 
-Monitoring the storage consumption of each SQL table.
+* Monitoring the storage consumption of each SQL table.
 
-Inserting or deleting records across any table through structured forms.
+* Inserting or deleting records across any table through structured forms.
 
-Viewing a live feed of the most recent 100 database operations (insertions, deletions, updates).
+* Viewing a live feed of the most recent 100 database operations (insertions, deletions, updates).
 
-Handling user support tickets submitted via the frontend. Admins can respond and update ticket statuses in real-time.
+* Handling user support tickets submitted via the frontend. Admins can respond and update ticket statuses in real-time.
 
-Manual SQL Row Insertion/Deletion
+* Manual SQL Row Insertion/Deletion
 
 Admins can select any SQL table, insert data via dynamically generated input fields (based on table structure), and send JSON payloads to the backend for insertion. Deletion uses a similar process and updates the table view post-operation.
 
@@ -109,23 +109,23 @@ Two key scripts maintain the stock data backend:
 
 main_fetch.py:
 
-Gathers full historical data for each S&P 500 company.
+* Gathers full historical data for each S&P 500 company.
 
-Inserts into Stock, StockPrice, and Sector tables.
+* Inserts into Stock, StockPrice, and Sector tables.
 
-Fetches from Yahoo Finance and falls back to Finnhub.
+* Fetches from Yahoo Finance and falls back to Finnhub.
 
-Converts timestamps to Pacific Time.
+* Converts timestamps to Pacific Time.
 
 quick_fetch.py:
 
-Used for daily updates.
+* Used for daily updates.
 
-Only fetches and inserts prices not yet stored.
+* Only fetches and inserts prices not yet stored.
 
-Designed to avoid redundant API calls.
+* Designed to avoid redundant API calls.
 
-Database functions in database.py abstract all SQL operations, ensuring modular and reusable logic across routes.
+* Database functions in database.py abstract all SQL operations, ensuring modular and reusable logic across routes.
 
 
 

@@ -25,27 +25,27 @@ GeneQuest follows a modular, two-layer client-server architecture:
 
 ## APIs & Libraries:
 
-NCBI Entrez for GenBank queries
+* NCBI Entrez for GenBank queries
 
-NCBIWWW via BioPython for BLAST/MegaBLAST
+* NCBIWWW via BioPython for BLAST/MegaBLAST
 
-MAFFT CLI for multiple sequence alignment
+* MAFFT CLI for multiple sequence alignment
 
-TreeConstruction module from BioPython for phylogenetic trees
+* TreeConstruction module from BioPython for phylogenetic trees
 
-Matplotlib for rendering static tree images
+* Matplotlib for rendering static tree images
 
 
 ## Core Features
 ### GenBank Sequence Search
 
-Allows users to search NCBI’s GenBank using gene names or accession IDs.
+* Allows users to search NCBI’s GenBank using gene names or accession IDs.
 
-Retrieves metadata and raw sequences in FASTA format.
+* Retrieves metadata and raw sequences in FASTA format.
 
-Enables sequence downloads for offline analysis.
+* Enables sequence downloads for offline analysis.
 
-Implements frontend caching to improve performance on repeated queries.
+* Implements frontend caching to improve performance on repeated queries.
 
 ### BLAST and MegaBLAST Alignment
 Supports two modes:
@@ -56,28 +56,19 @@ MegaBLAST: Optimized for large and highly similar sequences (e.g., rRNA).
 
 Results include:
 
-Hit IDs, descriptions, E-values, alignment scores
-
-A visual alignment viewer to explore indels, mutations, and conserved regions
-
-Includes FASTA file upload for large-scale alignments.
-
-Caches results in the frontend and manages long-running jobs by polling.
+* Hit IDs, descriptions, E-values, alignment scores
+* A visual alignment viewer to explore indels, mutations, and conserved regions
+* Includes FASTA file upload for large-scale alignments.
+* Caches results in the frontend and manages long-running jobs by polling.
 
 ### Phylogenetic Tree Generation
-Accepts a list of accession numbers and builds phylogenetic trees using UPGMA via MAFFT and BioPython.
-
-Trees are returned as static images and displayed in the frontend.
-
-Allows both stand-alone tree generation and tree construction from selected BLAST hits.
-
-Built using react-d3-tree for visualization and Matplotlib for rendering static outputs.
+* Accepts a list of accession numbers and builds phylogenetic trees using UPGMA via MAFFT and BioPython.
+* Trees are returned as static images and displayed in the frontend.
+* Allows both stand-alone tree generation and tree construction from selected BLAST hits.
+* Built using react-d3-tree for visualization and Matplotlib for rendering static outputs.
 
 ### Conservative Region Calculation
-Identifies conserved regions across selected sequences from BLAST or manual uploads.
-
-Uses MAFFT to align sequences and a custom ConservedRegionCalc.py tool to analyze similarity.
-
-Returns a visual representation of conserved domains, useful for further downstream analysis such as primer design or functional annotation.
-
-Together, these features offer a well-rounded toolkit for genetic analysis in both academic and research settings.
+* Identifies conserved regions across selected sequences from BLAST or manual uploads.
+* Uses MAFFT to align sequences and a custom ConservedRegionCalc.py tool to analyze similarity.
+* Returns a visual representation of conserved domains, useful for further downstream analysis such as primer design or functional annotation.
+* Together, these features offer a well-rounded toolkit for genetic analysis in both academic and research settings.
