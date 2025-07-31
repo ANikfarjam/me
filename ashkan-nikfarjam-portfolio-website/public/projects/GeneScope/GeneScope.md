@@ -42,7 +42,7 @@ This ranking system combines the results of five statistical tests commonly used
 
 For each method, genes were ranked based on performance, and pairwise comparison matrices were generated. Then the eigenvectors and eigenvalues of these matrices were computed to derive priority weights, which were averaged to create a final ranking of genes. This ranked list highlights genes most likely to be unregulated or mutated during cancer progression.
 
-### CatBoost Model for 
+### CatBoost Model 
 
 In GeneScope, CatBoost was used to estimate the probability that a patient sample belongs to each breast cancer stage. By effectively handling categorical clinical variables, CatBoost leverages its weight adjustment capability to improve prediction accuracy for minority classes. This allowed for more nuanced interpretation of disease progression across patient profiles.
 

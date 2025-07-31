@@ -14,25 +14,25 @@ This application guides users by:
 ## Stack & Architecture
 Frontend: Dash, built with a navbar-routing system and interactive graphs
 
-Backend: Python scripts (KMeans, AI logic), Flask for routing
+* Backend: Python scripts (KMeans, AI logic), Flask for routing
 
-Data: OECD indicators, scraped rental data, bootstrap-resampled data for better classification
+* Data: OECD indicators, scraped rental data, bootstrap-resampled data for better classification
 
-ML Model: K-Means clustering for grouping similar states (optimal K=3)
+* ML Model: K-Means clustering for grouping similar states (optimal K=3)
 
-AI Agent: Combines rule-based logic and semantic networks to map user responses to clustered cities
+* AI Agent: Combines rule-based logic and semantic networks to map user responses to clustered cities
 
 ## Key Features
-Geo & State Analysis: Compare regional trends (East vs. West Germany)
+* Geo & State Analysis: Compare regional trends (East vs. West Germany)
 
-Rental Estimator: Uses KNN imputation to fill in missing price data
+* Rental Estimator: Uses KNN imputation to fill in missing price data
 
-ML Explorer: Inertia plots and cluster visualizations
+* ML Explorer: Inertia plots and cluster visualizations
 
 Recommendation Engine:
 
-User fills out a form describing their priorities (affordability, jobs, education, etc.)
+* User fills out a form describing their priorities (affordability, jobs, education, etc.)
 
-Agent identifies matching clusters, retrieves relevant cities
+* Agent identifies matching clusters, retrieves relevant cities
 
-Returns personalized city suggestions
+* Returns personalized city suggestions
