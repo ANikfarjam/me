@@ -228,7 +228,7 @@ function App() {
                 detailedDescription:  <ReactMarkdown>{geneScopeContent}</ReactMarkdown>
               },
               {
-                name: 'X-ray-Image_classification_CNNRNN',
+                name: 'X-ray Image classification CNN-RNN',
                 links:['https://github.com/ANikfarjam/X-ray-Image_classification_CNNRNN'],
                 description: 'An X-ray image classifier built on a CNN-RNN hybrid model that detects and classifies bone fractures, while also identifying the type of bone (e.g., hand, leg).',
                 image: xrayImg,
@@ -252,7 +252,7 @@ function App() {
                 detailedDescription: <ReactMarkdown>{geneQuestContent}</ReactMarkdown>
               },
               {
-                name: 'MokeTheStock',
+                name: 'MockTheStock',
                 links:['https://github.com/ryanfernald/Stock-Market-Management-System'],
                 description: 'A full-stack web application built to simulate real-world trading and create stock portfolios.',
                 image: stockMarketLogo,

@@ -14,9 +14,6 @@ At the heart of the platform is a deep learning model that fuses two types of me
 
 These two models are integrated through intermediate fusion, where outputs from the genomic and clinical models are combined via an additional MLP layer that performs the final classification of cancer stage. The architecture was optimized using Neural Architecture Search (NAS) with Keras.
 
-<!-- To improve robustness and reduce bias from unbalanced datasets, the platform compares this fusion model against a baseline SMOTE-augmented MLP. Despite SMOTE achieving slightly higher accuracy, GeneScope’s fusion model is preferred in medical contexts due to its preservation of clinical data integrity and interpretability. -->
-
-
 ### Retrieval Augmented Generative Chatbot
 
 To make the scientific insights more comprehensive, GeneScope features a LangChain-powered chatbot that acts as a research assistant within the app. This chatbot is backed by a Pinecone vector database, and generates retrieval augmented and content aware responses from a vector database of research papers, documentation, and major findings.
@@ -28,6 +25,7 @@ To make the scientific insights more comprehensive, GeneScope features a LangCha
 GeneScope integrates multiple statistical and machine learning methods to identify key biomarkers and evaluate their role in breast cancer progression. These approaches helped uncover both gene-level and clinical insights that contribute to accurate stage classification and prognosis.
 
 ### Analytic Hierarchy Process (AHP)
+
 To prioritize genes based on their biological relevance, an Analytic Hierarchy Process (AHP) is utilized. AHP is a structured decision-making method that ranks features according to multiple statistical indicators. AHP is particularly useful in bioinformatics to identify which genes are significantly relevant to disease progression.
 
 This ranking system combines the results of five statistical tests commonly used in expression analysis:
