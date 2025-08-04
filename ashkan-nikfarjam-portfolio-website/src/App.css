@@ -1,3 +1,4 @@
+/* Desktop */
 .App {
   text-align: center;
 }
@@ -410,4 +411,177 @@ body,html { margin:0; padding:0; }
 
 .link-icon:hover {
   opacity: 0.7;
+}
+
+/* mobile or small screen */
+/* Mobile and Small Screen Styles */
+@media only screen and (max-width: 768px) {
+  /* General adjustments */
+  .content {
+    margin-top: 50px;
+  }
+
+  .section {
+    padding: 1rem;
+  }
+
+  /* Navigation */
+  .nav {
+    padding: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .nav-link {
+    margin: 0 0.5rem;
+    font-size: 0.9rem;
+    padding: 0.3rem 0;
+  }
+
+  /* Profile section */
+  .profile-container {
+    flex-direction: column;
+    gap: 20px;
+    padding: 15px;
+  }
+
+  .profile-text {
+    text-align: center;
+  }
+
+  .profile-text ul {
+    padding-left: 15px;
+    font-size: 1rem;
+  }
+
+  .profile-img {
+    width: 150px;
+    height: 150px;
+  }
+
+  /* About section */
+  .about-content {
+    padding: 15px;
+  }
+
+  .about-content p {
+    width: 95%;
+    font-size: 0.95rem;
+  }
+
+  /* Projects section */
+  .projects-container {
+    padding: 1rem 0.5rem;
+  }
+
+  .project-card {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  /* Education section */
+  .edu-content {
+    padding: 15px;
+  }
+
+  .edu-content h2 {
+    font-size: 1.2rem;
+  }
+
+  .edu-content p {
+    font-size: 1rem;
+  }
+
+  /* Side projects section */
+  .side-projects {
+    padding: 15px;
+  }
+
+  .side-projects iframe {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/9;
+  }
+
+  .side-projects p {
+    font-size: 0.95rem;
+  }
+
+  /* Modal adjustments */
+  .modal-content {
+    width: 95%;
+    padding: 1rem;
+  }
+
+  .image-slider-container {
+    height: 250px;
+  }
+
+  .markdown-body {
+    max-height: 50vh;
+    font-size: 0.9rem;
+  }
+
+  /* Contact icons */
+  .contact-icons {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.8rem;
+  }
+
+  .contact-item {
+    font-size: 0.9rem;
+  }
+
+  /* Project links */
+  .project-links {
+    margin: 0.5rem 0;
+  }
+
+  /* Work experience timeline */
+  .timeline-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .timeline-date {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline-content {
+    width: 100%;
+    padding-left: 0;
+  }
+}
+
+/* Extra small devices (phones, 480px and down) */
+@media only screen and (max-width: 480px) {
+  .nav-link {
+    font-size: 0.8rem;
+    margin: 0 0.3rem;
+  }
+
+  .profile-text h1 {
+    font-size: 1.8rem;
+  }
+
+  .profile-text h2 {
+    font-size: 1.5rem;
+  }
+
+  .about-content h1,
+  .edu-content h1,
+  .side-projects h1 {
+    font-size: 1.8rem;
+  }
+
+  .image-slider-container {
+    height: 200px;
+  }
+
+  .modal-content h2 {
+    font-size: 1.5rem;
+  }
 }
