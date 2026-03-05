@@ -4,6 +4,20 @@ import './styling/WorkExperienceTimeline.css';
 
 const experiences = [
   {
+    role: "Software Engineer, Temp",
+    company: "Stanford School of Medicine Genomic Lab",
+    location: "Stanford, CA",
+    date: "Sep 2025 - Present",
+    details: [
+      "Engineered full-stack features for an AI/LLM-based genomic research web application enabling regulatory-genome studies across diverse cell types.",
+      "Designed and optimized ML preprocessing workflows, reducing pipeline failure rates from ~20% to 1–2% by improving validation logic, error handling, logging, and modular pipeline design.",
+      "Implemented real-time genomic variant scoring using the AlphaGenome deep learning model, enabling on-the-fly annotation and scoring of thousands of variants per request for downstream regulatory impact analysis.",
+      "Designed and maintained scalable data–model interaction workflows across multi-cloud environments using Terraform for infrastructure as code and Prefect and other orchestration tools, ensuring reproducible and fault-tolerant pipeline execution.",
+      "Built automated validation and preprocessing pipelines for genomic variant data (TSV/FASTA), including region filtering, schema validation, and coding/non-coding classification to ensure data integrity prior to model inference.",
+      "Deployed a JupyterHub server to manage user notebooks (Marimo), allowing researchers to import and analyze the model's result data easily."
+    ]
+  },
+  {
     role: "IT Consultant",
     company: "Robert Half Technology",
     location: "San Francisco, CA",
@@ -119,54 +133,75 @@ const experiences = [
 ];
 
 const WorkExperienceTimeline = () => {
+  const [openExpIdx, setOpenExpIdx] = useState(0);
   const [openClientIdx, setOpenClientIdx] = useState(null);
 
-  const toggleClient = (idx) => {
-    setOpenClientIdx(openClientIdx === idx ? null : idx);
+  const toggleExp = (idx) => {
+    setOpenExpIdx(openExpIdx === idx ? null : idx);
+    setOpenClientIdx(null);
+  };
+
+  const toggleClient = (key) => {
+    setOpenClientIdx(openClientIdx === key ? null : key);
   };
 
   return (
     <div className="timeline-container">
       <h2>Work Experience</h2>
       <div className="timeline">
-        {experiences.map((exp, idx) => (
-          <div key={idx} className="timeline-item">
-            <div className="timeline-icon">
-              <FaBriefcase />
-            </div>
-            <div className="timeline-content">
-              <h3>{exp.role} @ {exp.company}</h3>
-              <span className="timeline-date">{exp.date}</span>
-              <p className="timeline-location">{exp.location}</p>
-              <ul>
-                {exp.details.map((point, i) => (
-                  <li key={i}>{point}</li>
-                ))}
-              </ul>
-
-              {exp.clients && (
-                <div className="client-section">
-                  <h4>Client Engagements:</h4>
-                  {exp.clients.map((client, cidx) => (
-                    <div key={cidx} className="client-block">
-                      <div className="client-header" onClick={() => toggleClient(`${idx}-${cidx}`)}>
-                        <strong>{client.name}</strong> <span>({client.industry}, {client.duration})</span>
-                        {openClientIdx === `${idx}-${cidx}` ? <FaChevronUp /> : <FaChevronDown />}
-                      </div>
-                      {openClientIdx === `${idx}-${cidx}` && (
-                        <ul className="client-tasks">
-                          {client.tasks.map((task, tidx) => (
-                            <li key={tidx}>{task}</li>
-                          ))}
-                        </ul>
-                      )}
-                    </div>
-                  ))}
+        {experiences.map((exp, idx) => {
+          const isOpen = openExpIdx === idx;
+          return (
+            <div key={idx} className={`timeline-item${isOpen ? ' timeline-item--open' : ''}`}>
+              <div className="timeline-icon">
+                <FaBriefcase />
+              </div>
+              <div className="timeline-content">
+                <div className="timeline-header" onClick={() => toggleExp(idx)}>
+                  <div className="timeline-header-text">
+                    <h3>{exp.role} @ {exp.company}</h3>
+                    <span className="timeline-date">{exp.date} &bull; {exp.location}</span>
+                  </div>
+                  {isOpen ? <FaChevronUp className="timeline-chevron" /> : <FaChevronDown className="timeline-chevron" />}
                 </div>
-              )}
+
+                {isOpen && (
+                  <div className="timeline-body">
+                    <ul>
+                      {exp.details.map((point, i) => (
+                        <li key={i}>{point}</li>
+                      ))}
+                    </ul>
+
+                    {exp.clients && (
+                      <div className="client-section">
+                        <h4>Client Engagements:</h4>
+                        {exp.clients.map((client, cidx) => {
+                          const key = `${idx}-${cidx}`;
+                          return (
+                            <div key={cidx} className="client-block">
+                              <div className="client-header" onClick={() => toggleClient(key)}>
+                                <strong>{client.name}</strong> <span>({client.industry}, {client.duration})</span>
+                                {openClientIdx === key ? <FaChevronUp /> : <FaChevronDown />}
+                              </div>
+                              {openClientIdx === key && (
+                                <ul className="client-tasks">
+                                  {client.tasks.map((task, tidx) => (
+                                    <li key={tidx}>{task}</li>
+                                  ))}
+                                </ul>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

@@ -171,7 +171,7 @@ function App() {
                   <span>ashkan_nikfarjam@yahoo.com</span>
                 </div>
                 <a
-                  href="https://raw.githubusercontent.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/backend/pinecone_local/Docs/resume/_Ashkan%20Nikfajram%20SW%2025.pdf"
+                  href="https://raw.githubusercontent.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/backend/pinecone_local/Docs/resume/Ashkan%20Nikfajram_SW26.pdf"
                   download="Ashkan_Nikfarjam_Resume.pdf"
                   className="contact-item"
                 >
@@ -202,11 +202,49 @@ function App() {
             About me
           </h1>
           <p>
-          Hi! I’m Ashkan Nikfarjam, a recent Data Science graduate from San Jose State University with a strong foundation in AI-powered solutions, full-stack web development, and interactive data dashboard design. 
-          I’m passionate about building intelligent systems, whether they’re machine learning applications, LLM-driven tools, or robotics side projects that explore automation and control.
-          As a classically trained violinist, I also bring a deep sense of discipline, creativity, and structure to my technical work.
+          Hi, I’m Ashkan Nikfarjam, a Data Science graduate and software engineer working at the intersection of machine learning, research, and production systems.
+
+          My current work involves building scalable AI-powered pipelines for genomic analysis, including real-time variant scoring, automated data validation, and reproducible ML workflows deployed across cloud environments. More broadly, I’m interested in applying AI and machine learning to complex research problems, translating advanced models into reliable, production-ready systems that can be used beyond the lab.
+
+          I’m particularly drawn to areas where deep learning, data engineering, and scientific inquiry converge, whether in biomedical research, applied AI platforms, or industry-scale intelligent systems.
         </p>
         </div>
+      )
+    },
+    {
+      id: 'skills',
+      content: (
+        <div className="skills-content">
+          <h1>Skills</h1>
+          <div className="skills-grid">
+            {[
+              { category: 'Languages', skills: ['C++', 'Java', 'Python', 'JavaScript (React)', 'TypeScript', 'HTML', 'CSS', 'shadcn/ui', 'MUI'] },
+              { category: 'Agents & Protocols', skills: ['Model Context Protocol (MCP)', 'LangChain', 'LangGraph', 'LangSmith'] },
+              { category: 'ML Frameworks', skills: ['Scikit-Learn', 'PyTorch', 'TensorFlow', 'Keras', 'Vaex'] },
+              { category: 'Data Libraries', skills: ['Pandas', 'Seaborn', 'Matplotlib', 'Plotly', 'BeautifulSoup', 'Dash', 'Marimo', 'Jupyter'] },
+              { category: 'Databases & ORMs', skills: ['SQLite', 'MySQL', 'SQLAlchemy', 'Firebase RealTime DB', 'FireStore DB'] },
+              { category: 'Cloud & DevOps', skills: ['DockerHub', 'GitHub', 'Kubernetes', 'GCP (Compute Engine, Cloud Composer, Pub/Sub, BigQuery)', 'Vercel', 'Render', 'Azure (Cloud Storage, VMs)'] },
+              { category: 'APIs & Backend', skills: ['REST APIs', 'FastAPI', 'Flask', 'Pydantic', 'Auth0'] },
+              { category: 'Workflow & Orchestration', skills: ['Dagster', 'Prefect', 'Terraform'] },
+            ].map(({ category, skills }) => (
+              <div key={category} className="skill-card">
+                <h3 className="skill-category">{category}</h3>
+                <div className="skill-tags">
+                  {skills.map(skill => (
+                    <span key={skill} className="skill-tag">{skill}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )
+    },
+    {
+      id: 'Experience',
+      title: 'My Experience',
+      content: (
+        <WorkExperienceTimeline />
       )
     },
     {
@@ -312,13 +350,6 @@ function App() {
             ))}
           </div>
         </div>
-      )
-    },
-    {
-      id: 'Experience',
-      title: 'My Experience',
-      content: (
-        <WorkExperienceTimeline />
       )
     },
     {

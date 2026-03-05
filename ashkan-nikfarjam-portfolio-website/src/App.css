@@ -413,6 +413,75 @@ body,html { margin:0; padding:0; }
   opacity: 0.7;
 }
 
+/* Skills section */
+.skills-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  color: #fffefe;
+  background: rgba(30, 40, 60, 0.483);
+  border-radius: 12px;
+  padding: 24px 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.skills-content h1 {
+  margin: 0 0 0.5rem 0;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.2rem;
+  width: 100%;
+}
+
+.skill-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(245, 208, 103, 0.2);
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.skill-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(245, 208, 103, 0.5);
+}
+
+.skill-category {
+  color: #f5d067;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  margin: 0 0 0.75rem 0;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid rgba(245, 208, 103, 0.3);
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.skill-tag {
+  background: rgba(245, 208, 103, 0.1);
+  color: #ddd;
+  border: 1px solid rgba(245, 208, 103, 0.22);
+  border-radius: 20px;
+  padding: 0.22rem 0.65rem;
+  font-size: 0.82rem;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.skill-tag:hover {
+  background: rgba(245, 208, 103, 0.25);
+  color: #f5d067;
+}
+
 /* mobile or small screen */
 /* Mobile and Small Screen Styles */
 @media only screen and (max-width: 768px) {
@@ -493,6 +562,15 @@ body,html { margin:0; padding:0; }
     font-size: 1rem;
   }
 
+  /* Skills section */
+  .skills-content {
+    padding: 15px;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
   /* Side projects section */
   .side-projects {
     padding: 15px;
@@ -558,6 +636,10 @@ body,html { margin:0; padding:0; }
 
 /* Extra small devices (phones, 480px and down) */
 @media only screen and (max-width: 480px) {
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
   .nav-link {
     font-size: 0.8rem;
     margin: 0 0.3rem;
