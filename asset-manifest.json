@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/me/static/css/main.7ed0b939.css",
-    "main.js": "/me/static/js/main.fafc88a7.js",
+    "main.css": "/me/static/css/main.5a600538.css",
+    "main.js": "/me/static/js/main.114c1927.js",
     "static/js/453.c11d07f6.chunk.js": "/me/static/js/453.c11d07f6.chunk.js",
     "static/media/connect4.png": "/me/static/media/connect4.4409fafae318ecbbe5d6.png",
     "static/media/portpic.jpg": "/me/static/media/portpic.82a38c9426d08070fdf9.jpg",
@@ -13,12 +13,12 @@
     "static/media/germany.jpg": "/me/static/media/germany.d5814052742a87147b08.jpg",
     "static/media/geneQuest.jpg": "/me/static/media/geneQuest.821b5fb6fd9c8a43c815.jpg",
     "index.html": "/me/index.html",
-    "main.7ed0b939.css.map": "/me/static/css/main.7ed0b939.css.map",
-    "main.fafc88a7.js.map": "/me/static/js/main.fafc88a7.js.map",
+    "main.5a600538.css.map": "/me/static/css/main.5a600538.css.map",
+    "main.114c1927.js.map": "/me/static/js/main.114c1927.js.map",
     "453.c11d07f6.chunk.js.map": "/me/static/js/453.c11d07f6.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7ed0b939.css",
-    "static/js/main.fafc88a7.js"
+    "static/css/main.5a600538.css",
+    "static/js/main.114c1927.js"
   ]
 }
