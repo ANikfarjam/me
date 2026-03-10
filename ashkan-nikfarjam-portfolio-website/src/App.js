@@ -415,7 +415,6 @@ function App() {
               This was the first prototype of my Arduino-based mechanical arm project. It was designed to assist with soldering tasks and controlled using servo motors and other components.
             </p>
           </div>
-          <Chatbot />
         </div>
       )
      }
@@ -460,6 +459,7 @@ function App() {
           </Element>
         ))}
       </div>
+      <Chatbot />
     </>
   );
 }

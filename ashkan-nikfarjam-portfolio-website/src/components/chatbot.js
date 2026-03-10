@@ -1,36 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
+import { FaComments, FaTimes, FaPaperPlane, FaRobot } from "react-icons/fa";
 import "./styling/chatbot.css";
+
+const WELCOME = {
+  sender: "bot",
+  text: "Hi! I'm Ashkan's AI assistant. Ask me anything about his experience, projects, or skills.",
+};
 
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([WELCOME]);
   const [loading, setLoading] = useState(false);
+  const messagesEndRef = useRef(null);
 
-  const toggleChat = () => setIsOpen(!isOpen);
+  const toggleChat = () => setIsOpen((prev) => !prev);
 
-  // const sendMessage = async () => {
-  //   if (!input.trim()) return;
+  useEffect(() => {
+    if (isOpen) {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages, isOpen]);
 
-  //   const userMessage = { sender: "user", text: input };
-  //   setMessages((prev) => [...prev, userMessage]);
-
-  //   try {
-  //     const response = await axios.post("https://portfolio-latest-vi63.onrender.com/query", {
-  //       text: input,  
-  //       top_k: 10      
-  //     });
-
-  //     const botMessage = { sender: "bot", text: response.data.response || "No response." };
-  //     setMessages((prev) => [...prev, botMessage]);
-  //   } catch (error) {
-  //     const errorMessage = { sender: "bot", text: "Error contacting server." };
-  //     setMessages((prev) => [...prev, errorMessage]);
-  //   }
-
-  //   setInput("");
-  // };
   const sendMessage = async () => {
     if (!input.trim()) return;
 
@@ -40,63 +32,110 @@ const Chatbot = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post("https://portfolio-latest-vi63.onrender.com/query", {
-        text: input,
-        top_k: 10
-      });
-
-      const botMessage = { sender: "bot", text: response.data.response || "No response." };
+      const response = await axios.post(
+        "https://portfolio-latest-vi63.onrender.com/query",
+        { text: input, top_k: 10 }
+      );
+      const botMessage = {
+        sender: "bot",
+        text: response.data.response || "No response.",
+      };
       setMessages((prev) => [...prev, botMessage]);
-    } catch (error) {
-      const errorMessage = { sender: "bot", text: "Error contacting server." };
-      setMessages((prev) => [...prev, errorMessage]);
+    } catch {
+      setMessages((prev) => [
+        ...prev,
+        { sender: "bot", text: "Error contacting server." },
+      ]);
     }
 
     setLoading(false);
   };
 
-
   return (
     <div className="chatbot-container">
-      <button className="chatbot-button" onClick={toggleChat}>
-        💬
-      </button>
-
       {isOpen && (
         <div className="chatbot-dialog">
+          {/* Header */}
+          <div className="chatbot-header">
+            <div className="chatbot-header-info">
+              <div className="chatbot-avatar">
+                <FaRobot size={15} />
+              </div>
+              <div>
+                <div className="chatbot-header-name">Ashkan's Assistant</div>
+                <div className="chatbot-header-status">
+                  <span className="chatbot-status-dot" />
+                  Online
+                </div>
+              </div>
+            </div>
+            <button
+              className="chatbot-close"
+              onClick={toggleChat}
+              aria-label="Close chat"
+            >
+              <FaTimes size={13} />
+            </button>
+          </div>
+
+          {/* Messages */}
           <div className="chatbot-messages">
             {messages.map((msg, i) => (
-              <div
-                key={i}
-                className={`chatbot-message ${msg.sender === "user" ? "user" : "bot"}`}
-              >
-                {msg.text}
+              <div key={i} className={`chatbot-message ${msg.sender}`}>
+                {msg.sender === "bot" && (
+                  <div className="chatbot-msg-avatar">
+                    <FaRobot size={10} />
+                  </div>
+                )}
+                <div className="chatbot-bubble">{msg.text}</div>
               </div>
             ))}
-        
-      {loading && (
-        <div className="chatbot-message bot">
-          <div className="dot-typing">
-            <span></span>
-            <span></span>
-            <span></span>
+
+            {loading && (
+              <div className="chatbot-message bot">
+                <div className="chatbot-msg-avatar">
+                  <FaRobot size={10} />
+                </div>
+                <div className="chatbot-bubble">
+                  <div className="dot-typing">
+                    <span />
+                    <span />
+                    <span />
+                  </div>
+                </div>
+              </div>
+            )}
+            <div ref={messagesEndRef} />
+          </div>
+
+          {/* Input */}
+          <div className="chatbot-input">
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+              placeholder="Ask me anything..."
+            />
+            <button
+              onClick={sendMessage}
+              disabled={!input.trim()}
+              aria-label="Send message"
+            >
+              <FaPaperPlane size={13} />
+            </button>
           </div>
         </div>
       )}
-      </div>
-      <div className="chatbot-input">
-        <input
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-          placeholder="Ask something..."
-        />
-        <button onClick={sendMessage}>Send</button>
-      </div>
-    </div>
-  )}
 
+      {/* FAB */}
+      <button
+        className="chatbot-fab"
+        onClick={toggleChat}
+        aria-label={isOpen ? "Close chat" : "Open chat"}
+      >
+        {isOpen ? <FaTimes size={20} /> : <FaComments size={20} />}
+      </button>
     </div>
   );
 };
