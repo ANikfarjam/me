@@ -171,7 +171,7 @@ function App() {
                   <span>ashkan_nikfarjam@yahoo.com</span>
                 </div>
                 <a
-                  href="https://raw.githubusercontent.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/backend/pinecone_local/Docs/resume/Ashkan%20Nikfajram_SW26.pdf"
+                  href="https://raw.githubusercontent.com/ANikfarjam/me/main/ashkan-nikfarjam-portfolio-website/backend/pinecone_local/Docs/resume/Ashkan%20Nikfajram_SW26.pdf"
                   download="Ashkan_Nikfarjam_Resume.pdf"
                   className="contact-item"
                 >

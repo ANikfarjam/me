@@ -12,7 +12,7 @@
 # class VectorDB:
 #     def __init__(self):
 #         """Initialize Pinecone client and setup default configurations"""
-#         self.pc = Pinecone(api_key=os.getenv('Pinecone_API_Key'))
+#         self.pc = Pinecone(api_key=os.getenv('PINE_API_KEY'))
 #         self.default_embedding_model = "text-embedding-3-small"
 #         self.default_dimension = 1536  # For text-embedding-3-small
         
@@ -199,7 +199,7 @@ nltk.download('punkt')
 class VectorDB:
     def __init__(self):
         """Initialize Pinecone client and setup default configurations"""
-        self.pc = Pinecone(api_key=os.getenv('Pinecone_API_Key'))
+        self.pc = Pinecone(api_key=os.getenv('PINE_API_KEY'))
         self.default_embedding_model = "BAAI/bge-small-en-v1.5"  # 384 dimensions
         self.default_dimension = 384  # Matching the FastEmbed model
         

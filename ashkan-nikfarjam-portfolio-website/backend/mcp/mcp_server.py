@@ -38,6 +38,7 @@ load_dotenv()
 MISTRAL_API_KEY = os.getenv('MISTRAL_API_KEY')
 MISTRAL_API_URL = "https://api.mistral.ai/v1/chat/completions"
 MISTRAL_MODEL = "mistral-small"
+PINE_API_KEY = os.getenv('PINE_API_KEY')
 
 # Initialize components with error handling
 try:
@@ -119,6 +120,52 @@ def get_query_embedding(query: str) -> List[float]:
             status_code=500,
             detail=f"Embedding generation failed: {str(e)}"
         )
+
+@app.get("/health")
+async def health_check():
+    """Check server health including Mistral API and Pinecone connectivity."""
+    checks = {"server": "ok", "mistral": "unknown", "pinecone": "unknown"}
+    all_ok = True
+
+    # Check Mistral API key validity
+    try:
+        headers = {
+            "Authorization": f"Bearer {MISTRAL_API_KEY}",
+            "Content-Type": "application/json"
+        }
+        payload = {
+            "model": MISTRAL_MODEL,
+            "messages": [{"role": "user", "content": "ping"}],
+            "max_tokens": 1
+        }
+        resp = requests.post(
+            MISTRAL_API_URL, headers=headers, json=payload, timeout=10, verify=False
+        )
+        if resp.status_code == 200:
+            checks["mistral"] = "ok"
+        else:
+            checks["mistral"] = f"error: HTTP {resp.status_code}"
+            all_ok = False
+    except Exception as e:
+        checks["mistral"] = f"error: {str(e)}"
+        all_ok = False
+
+    # Check Pinecone connectivity using PINE_API_KEY from mcp/.env
+    try:
+        from pinecone import Pinecone as PineconeClient
+        pc = PineconeClient(api_key=PINE_API_KEY)
+        pc.list_indexes().names()
+        checks["pinecone"] = "ok"
+    except Exception as e:
+        checks["pinecone"] = f"error: {str(e)}"
+        all_ok = False
+
+    status_code = 200 if all_ok else 503
+    return JSONResponse(
+        status_code=status_code,
+        content={"status": "ok" if all_ok else "degraded", "checks": checks}
+    )
+
 
 @app.post("/query")
 async def generate_content(request: QueryRequest):
