@@ -2,7 +2,7 @@
 # import os
 # from dotenv import load_dotenv
 # from typing import List, Dict, Optional
-# from langchain.text_splitter import RecursiveCharacterTextSplitter
+# from langchain_text_splitters import RecursiveCharacterTextSplitter
 # from langchain.document_loaders import PyPDFLoader, UnstructuredMarkdownLoader
 # import hashlib
 # from fastembed.embedding import DefaultEmbedding
@@ -185,7 +185,7 @@ import os
 from dotenv import load_dotenv
 from typing import List, Dict, Optional
 from langchain_community.document_loaders import PyPDFLoader, UnstructuredMarkdownLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 import hashlib
 from fastembed import TextEmbedding
 import nltk

@@ -11,9 +11,10 @@ python-dotenv
 # Pinecone client
 pinecone
 
-# LangChain core + community loaders
+# LangChain core + community loaders + text splitters
 langchain
 langchain-community
+langchain-text-splitters
 
 # Embedding library you’re using
 fastembed
