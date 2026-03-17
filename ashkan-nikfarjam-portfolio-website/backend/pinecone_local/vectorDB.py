@@ -199,7 +199,7 @@ nltk.download('punkt')
 class VectorDB:
     def __init__(self):
         """Initialize Pinecone client and setup default configurations"""
-        self.pc = Pinecone(api_key=os.getenv('PINE_API_KEY'))
+        self.pc = Pinecone(api_key=os.getenv('Pinecone_API_Key'))
         self.default_embedding_model = "BAAI/bge-small-en-v1.5"  # 384 dimensions
         self.default_dimension = 384  # Matching the FastEmbed model
         
