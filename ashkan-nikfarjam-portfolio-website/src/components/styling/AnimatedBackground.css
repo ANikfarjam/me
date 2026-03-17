@@ -1,0 +1,84 @@
+.aurora-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: #030712;
+  overflow: hidden;
+}
+
+.aurora-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(110px);
+  will-change: transform;
+}
+
+.aurora-orb-1 {
+  width: 750px;
+  height: 750px;
+  background: radial-gradient(circle at center, rgba(99, 102, 241, 0.32), transparent 68%);
+  top: -220px;
+  left: -180px;
+  animation: aurora-drift-1 30s ease-in-out infinite;
+}
+
+.aurora-orb-2 {
+  width: 620px;
+  height: 620px;
+  background: radial-gradient(circle at center, rgba(6, 182, 212, 0.22), transparent 68%);
+  bottom: -120px;
+  right: -120px;
+  animation: aurora-drift-2 24s ease-in-out infinite;
+}
+
+.aurora-orb-3 {
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle at center, rgba(168, 85, 247, 0.18), transparent 68%);
+  top: 45%;
+  left: 52%;
+  animation: aurora-drift-3 20s ease-in-out infinite;
+}
+
+.aurora-orb-4 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle at center, rgba(34, 211, 238, 0.12), transparent 70%);
+  top: 20%;
+  right: 15%;
+  animation: aurora-drift-4 26s ease-in-out infinite;
+}
+
+.aurora-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(129, 140, 248, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(129, 140, 248, 0.035) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+@keyframes aurora-drift-1 {
+  0%,  100% { transform: translate(0px, 0px)     scale(1);    }
+  25%        { transform: translate(160px, 100px) scale(1.12); }
+  50%        { transform: translate(80px,  220px) scale(0.92); }
+  75%        { transform: translate(-50px, 90px)  scale(1.08); }
+}
+
+@keyframes aurora-drift-2 {
+  0%,  100% { transform: translate(0px, 0px)       scale(1);    }
+  30%        { transform: translate(-140px, -170px) scale(1.15); }
+  60%        { transform: translate(-200px, -60px)  scale(0.88); }
+}
+
+@keyframes aurora-drift-3 {
+  0%,  100% { transform: translate(-50%, -50%) scale(1);    }
+  33%        { transform: translate(-68%, -32%) scale(1.2);  }
+  66%        { transform: translate(-32%, -68%) scale(0.85); }
+}
+
+@keyframes aurora-drift-4 {
+  0%,  100% { transform: translate(0px, 0px)    scale(1);   }
+  40%        { transform: translate(-80px, 120px) scale(1.1); }
+  70%        { transform: translate(60px,  60px)  scale(0.9); }
+}
