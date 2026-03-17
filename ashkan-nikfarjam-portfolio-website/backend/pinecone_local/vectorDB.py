@@ -332,14 +332,14 @@ class VectorDB:
             print(f"Error upserting documents: {str(e)}")
             return False
     
-    def query_index(self, index_name: str, query_embedding: List[float], top_k: int = 5, 
+    def query_index(self, index_name: str, query_embedding: List[float], top_k: int = 5,
                    filter: Dict = None) -> List[Dict]:
         """Query a Pinecone index"""
         index = self.get_index(index_name)
         if not index:
             print(f"Index {index_name} not found")
             return []
-        
+
         try:
             results = index.query(
                 vector=query_embedding,
@@ -351,3 +351,42 @@ class VectorDB:
         except Exception as e:
             print(f"Error querying index {index_name}: {str(e)}")
             return []
+
+    def query_with_supplement(self, index_name: str, query_embedding: List[float], top_k: int = 3):
+        """Strategy 2 paired retrieval: fetch resume chunks then their supplement pairs.
+
+        Returns (resume_matches, supplement_matches). Falls back to unfiltered query
+        if the index has no doc_type metadata (legacy indexes).
+        """
+        # Step 1: get top-k resume chunks
+        resume_matches = self.query_index(
+            index_name, query_embedding, top_k=top_k,
+            filter={"doc_type": {"$eq": "resume"}}
+        )
+
+        if not resume_matches:
+            # Fallback: index may not have doc_type metadata yet
+            return self.query_index(index_name, query_embedding, top_k=top_k), []
+
+        # Step 2: extract role_keys (if present) for targeted supplement lookup
+        role_keys = list({
+            m.metadata["role_key"]
+            for m in resume_matches
+            if "role_key" in m.metadata
+        })
+
+        if role_keys:
+            supplement_filter = {
+                "doc_type": {"$eq": "supplement"},
+                "role_key": {"$in": role_keys}
+            }
+        else:
+            # No role_keys — fetch best-matching supplements by semantic similarity
+            supplement_filter = {"doc_type": {"$eq": "supplement"}}
+
+        supplement_matches = self.query_index(
+            index_name, query_embedding, top_k=max(len(role_keys), top_k),
+            filter=supplement_filter
+        )
+
+        return resume_matches, supplement_matches

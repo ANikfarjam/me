@@ -77,9 +77,15 @@ with Progress() as p:
     for category, file_list in docs.items():
         for fp in file_list:
             print(f"→ preparing {fp}")
-            process_docs = db.prepare_documents(file_path=fp)
-            if process_docs:  # Only upsert if documents were prepared successfully
+            # Tag doc_type based on filename — supplement files get "supplement", others "resume"
+            filename_lower = os.path.basename(fp).lower()
+            doc_type = "supplement" if "supplement" in filename_lower else "resume"
+            metadata = {"doc_type": doc_type}
+            process_docs = db.prepare_documents(file_path=fp, metadata=metadata)
+            if process_docs:
                 success = db.upsert_documents(documents=process_docs, index_name=category)
                 if not success:
                     print(f"⚠️ failed to upsert docs for {category}")
+                else:
+                    print(f"  ✔ {doc_type}: {os.path.basename(fp)} ({len(process_docs)} chunks)")
             p.update(task2, advance=1)

@@ -90,6 +90,7 @@ class DocumentResponse(BaseModel):
     text: str
     source: str
     score: float
+    doc_type: str = "resume"  # "resume" | "supplement"
 
 def mistral_call(prompt: str) -> str:
     """Wrapper for Mistral API calls with better error handling."""
@@ -166,51 +167,68 @@ async def service_status_check():
 async def generate_content(request: QueryRequest):
     try:
         print(f"Received query: {request.text}")
-        
-        # Step 1: Get relevant documents
+
+        # Step 1: Get relevant documents (resume facts + supplement context)
         documents = await query_documents(request)
         print(f'Found {len(documents)} relevant documents')
-        
-        # Step 2: Construct context and summarize it
-        full_context = "\n\n".join([doc.text for doc in documents])
-        
-        # Summarize the context to be more concise
-        summarization_prompt = f"""
-        Summarize the following information about Ashkan Nikfarjam, keeping only the details 
-        most relevant to this question: "{request.text}".
-        
-        Be concise but accurate. Include key facts, numbers, and specific achievements when available.
-        Do not add any information not present in the context.
-        
-        Context:
-        {full_context}
-        
-        Concise summary:
-        """
-        
+
+        # Step 2: Build structured context — resume facts separate from supplement reasoning
+        resume_chunks = [doc.text for doc in documents if doc.doc_type == "resume"]
+        supplement_chunks = [doc.text for doc in documents if doc.doc_type == "supplement"]
+
+        resume_section = "\n\n".join(resume_chunks) if resume_chunks else ""
+        supplement_section = "\n\n".join(supplement_chunks) if supplement_chunks else ""
+
+        if supplement_section:
+            structured_context = (
+                f"=== RESUME FACTS ===\n{resume_section}\n\n"
+                f"=== BACKGROUND & CONTEXT ===\n{supplement_section}"
+            )
+        else:
+            structured_context = resume_section
+
+        # Step 3: Summarize — instruct the model to combine both sources
+        summarization_prompt = f"""You are summarizing information about Ashkan Nikfarjam for a portfolio assistant.
+
+Question being asked: "{request.text}"
+
+Below are two sources:
+- RESUME FACTS: raw data from his resume (job titles, dates, bullet points)
+- BACKGROUND & CONTEXT: supplementary notes that explain the significance, scale, and impact of his work
+
+Produce a concise factual summary that:
+1. Uses resume facts as the ground truth for dates, titles, and specifics
+2. Incorporates background context to explain the impact and relevance
+3. Stays strictly within the information provided — do not invent details
+
+{structured_context}
+
+Concise summary:"""
+
         summarized_context = mistral_call(summarization_prompt)
-        
-        # Step 3: Generate final response
-        response_prompt = f"""
-        You are a professional assistant for Ashkan Nikfarjam's portfolio. 
-        Answer the question using ONLY the summarized context below.
-        Be professional, concise, and accurate.
-        If the question cannot be answered with the context, say:
-        "I don't have enough information about that aspect of Ashkan's background."
-        
-        Question: {request.text}
-        
-        Context:
-        {summarized_context}
-        
-        Answer:
-        """
-        
+
+        # Step 4: Generate final response
+        response_prompt = f"""You are a professional assistant for Ashkan Nikfarjam's portfolio website.
+
+Your job is to answer visitor questions accurately and confidently based solely on the provided context.
+
+Rules:
+- Answer directly and professionally — no filler phrases like "Based on the context..."
+- If a specific fact (date, number, technology) is in the context, include it
+- If the question cannot be answered from the context, say exactly: "I don't have enough information about that aspect of Ashkan's background."
+- Do not speculate or add information not present in the context
+
+Question: {request.text}
+
+Context:
+{summarized_context}
+
+Answer:"""
+
         response = mistral_call(response_prompt)
         return {"response": response.strip()}
 
     except HTTPException as he:
-        # Return user-friendly messages for client-facing errors
         if he.status_code == 400:
             return JSONResponse(
                 status_code=400,
@@ -309,7 +327,41 @@ async def query_documents(request: QueryRequest) -> List[DocumentResponse]:
         query_embedding = get_query_embedding(request.text)
         print('Query embedding generated')
 
-        # Step 3: Query vector DB
+        # Step 3: Query vector DB — use paired retrieval for categories with supplements
+        SUPPLEMENT_CATEGORIES = {"workexperience", "education"}
+
+        if category in SUPPLEMENT_CATEGORIES:
+            resume_results, supplement_results = db.query_with_supplement(
+                index_name=category,
+                query_embedding=query_embedding,
+                top_k=request.top_k
+            )
+            if not resume_results and not supplement_results:
+                raise HTTPException(
+                    status_code=404,
+                    detail="No relevant information found about this topic."
+                )
+            docs = [
+                DocumentResponse(
+                    id=r.id,
+                    text=r.metadata["text"],
+                    source=r.metadata["source"],
+                    score=r.score,
+                    doc_type=r.metadata.get("doc_type", "resume")
+                )
+                for r in resume_results
+            ] + [
+                DocumentResponse(
+                    id=r.id,
+                    text=r.metadata["text"],
+                    source=r.metadata["source"],
+                    score=r.score,
+                    doc_type=r.metadata.get("doc_type", "supplement")
+                )
+                for r in supplement_results
+            ]
+            return docs
+
         results = db.query_index(
             index_name=category,
             query_embedding=query_embedding,
@@ -327,7 +379,8 @@ async def query_documents(request: QueryRequest) -> List[DocumentResponse]:
                 id=result.id,
                 text=result.metadata["text"],
                 source=result.metadata["source"],
-                score=result.score
+                score=result.score,
+                doc_type=result.metadata.get("doc_type", "resume")
             )
             for result in results
         ]
