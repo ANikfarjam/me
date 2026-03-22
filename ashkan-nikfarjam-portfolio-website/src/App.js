@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { FaGithub, FaLinkedin, FaEnvelope, FaExternalLinkAlt } from 'react-icons/fa';
 import { IoDocuments } from "react-icons/io5";
 import { Link, Element } from 'react-scroll';
-import portfolio_img from './assets/portpic2.jpg';
+import portfolio_img from './assets/portpic2_resized.jpg';
 import genescope_icon from './assets/genescope.ico';
 import xrayImg from './assets/xray.png';
 import staircaseImg from './assets/staircase.jpeg';
@@ -74,6 +74,7 @@ function App() {
   const displayedRole = useTypewriter(ROLES);
 
   const [selectedProject, setSelectedProject] = useState(null);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   // Markdown content fetches
   const [geneScopeContent, setGeneScopeContent] = useState('');
@@ -464,7 +465,14 @@ function App() {
 
       <nav className="nav">
         <span className="nav-brand">A.Nikfarjam</span>
-        <div className="nav-links">
+        <button
+          className={`nav-hamburger${menuOpen ? ' open' : ''}`}
+          onClick={() => setMenuOpen(o => !o)}
+          aria-label="Toggle menu"
+        >
+          <span /><span /><span />
+        </button>
+        <div className={`nav-links${menuOpen ? ' nav-links--open' : ''}`}>
           {sections.map(section => (
             <Link
               key={section.id}
@@ -472,6 +480,7 @@ function App() {
               smooth
               duration={220}
               className="nav-link"
+              onClick={() => setMenuOpen(false)}
             >
               {section.id.charAt(0).toUpperCase() + section.id.slice(1)}
             </Link>
