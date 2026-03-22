@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/me/static/css/main.7493c733.css",
-    "main.js": "/me/static/js/main.5ddd2e47.js",
+    "main.css": "/me/static/css/main.4aaea32c.css",
+    "main.js": "/me/static/js/main.eb1866c3.js",
     "static/js/453.c11d07f6.chunk.js": "/me/static/js/453.c11d07f6.chunk.js",
     "static/media/connect4.png": "/me/static/media/connect4.4409fafae318ecbbe5d6.png",
-    "static/media/portpic2.jpg": "/me/static/media/portpic2.9c925a03912cb50e02fd.jpg",
     "static/media/healthmap.png": "/me/static/media/healthmap.781b3f58019fd024021c.png",
     "static/media/staircase.jpeg": "/me/static/media/staircase.0cca809f761dc38970bd.jpeg",
     "static/media/xray.png": "/me/static/media/xray.6a767d464715dc830007.png",
     "static/media/genescope.ico": "/me/static/media/genescope.a8bea3d2936ed8ef27c4.ico",
+    "static/media/portpic2_resized.jpg": "/me/static/media/portpic2_resized.8fa5d0563dda25a1d0d7.jpg",
     "static/media/germany.jpg": "/me/static/media/germany.d5814052742a87147b08.jpg",
     "static/media/geneQuest.jpg": "/me/static/media/geneQuest.821b5fb6fd9c8a43c815.jpg",
     "index.html": "/me/index.html",
-    "main.7493c733.css.map": "/me/static/css/main.7493c733.css.map",
-    "main.5ddd2e47.js.map": "/me/static/js/main.5ddd2e47.js.map",
+    "main.4aaea32c.css.map": "/me/static/css/main.4aaea32c.css.map",
+    "main.eb1866c3.js.map": "/me/static/js/main.eb1866c3.js.map",
     "453.c11d07f6.chunk.js.map": "/me/static/js/453.c11d07f6.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7493c733.css",
-    "static/js/main.5ddd2e47.js"
+    "static/css/main.4aaea32c.css",
+    "static/js/main.eb1866c3.js"
   ]
 }
