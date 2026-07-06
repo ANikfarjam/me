@@ -1,0 +1,19 @@
+# Start the frontend locally
+front_dev:
+    npm start
+
+# Build and deploy the frontend to GitHub Pages
+deploy_front:
+    npm run deploy
+
+# Start the backend server locally
+app:
+    cd backend && bash create_server.sh
+
+# Build, tag, and push the backend Docker image (deploy.sh handles Docker Hub push)
+app_deploy:
+    cd backend && bash deploy.sh
+
+# Reindex Pinecone from backend/pinecone_local/Docs (wipes and rebuilds every index)
+update_vector_db:
+    cd backend/pinecone_local && python3 setup2.py

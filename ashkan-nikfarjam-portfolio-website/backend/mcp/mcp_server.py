@@ -54,7 +54,7 @@ try:
 except Exception as e:
     print(f"Failed to initialize VectorDB: {str(e)}")
     service_status["pinecone"] = f"error: {str(e)}"
-    raise SystemExit(1)
+    db = None
 
 # Probe Mistral once at startup to set initial status
 try:

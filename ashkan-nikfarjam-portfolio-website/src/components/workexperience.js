@@ -11,10 +11,10 @@ const experiences = [
     details: [
       "Engineered full-stack features for an AI/LLM-based genomic research web application enabling regulatory-genome studies across diverse cell types.",
       "Designed and optimized ML preprocessing workflows, reducing pipeline failure rates from ~20% to 1–2% by improving validation logic, error handling, logging, and modular pipeline design.",
-      "Implemented real-time genomic variant scoring using the AlphaGenome deep learning model, enabling on-the-fly annotation and scoring of thousands of variants per request for downstream regulatory impact analysis.",
+      "Implemented real-time genomic variant scoring using the AlphaMissense deep learning model, enabling on-the-fly annotation and scoring of thousands of variants per request for downstream regulatory impact analysis.",
       "Designed and maintained scalable data–model interaction workflows across multi-cloud environments using Terraform for infrastructure as code and Prefect and other orchestration tools, ensuring reproducible and fault-tolerant pipeline execution.",
       "Built automated validation and preprocessing pipelines for genomic variant data (TSV/FASTA), including region filtering, schema validation, and coding/non-coding classification to ensure data integrity prior to model inference.",
-      "Deployed a JupyterHub server to manage user notebooks (Marimo), allowing researchers to import and analyze the model's result data easily."
+      "Developed agentic RAG systems for genomic analysis, including an autonomous variant triage agent that retrieves and grounds evidence from PubMed and a biology Q&A agent that aggregates information from genomic databases (GTEx, Reactome, ENCODE cCREs) into a shared context for downstream analysis."
     ]
   },
   {
