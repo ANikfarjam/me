@@ -23,15 +23,27 @@ const Chatbot = () => {
   const [serverStatus, setServerStatus] = useState("checking"); // "checking" | "online" | "offline"
   const messagesEndRef = useRef(null);
 
-  // Health check on mount
+  // Health check on mount, with retry/backoff to ride out Render cold starts
   useEffect(() => {
+    const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+    const HEALTH_RETRY_DELAYS_MS = [3000, 6000, 12000, 20000]; // ~1 initial + 4 retries, ~50s total budget
+
     const checkHealth = async () => {
-      try {
-        const res = await axios.get(`${BASE_URL}/health`, { timeout: 10000 });
-        setServerStatus(res.status === 200 ? "online" : "offline");
-      } catch {
-        setServerStatus("offline");
+      for (let attempt = 0; attempt <= HEALTH_RETRY_DELAYS_MS.length; attempt++) {
+        try {
+          const res = await axios.get(`${BASE_URL}/health`, { timeout: 10000 });
+          if (res.status === 200) {
+            setServerStatus("online");
+            return;
+          }
+        } catch {
+          // fall through to retry
+        }
+        if (attempt < HEALTH_RETRY_DELAYS_MS.length) {
+          await sleep(HEALTH_RETRY_DELAYS_MS[attempt]);
+        }
       }
+      setServerStatus("offline");
     };
     checkHealth();
   }, []);
@@ -53,6 +65,15 @@ const Chatbot = () => {
     }
   }, [messages, isOpen]);
 
+  const QUERY_TIMEOUT_MS = 60000;
+
+  const postQuery = () =>
+    axios.post(
+      `${BASE_URL}/query`,
+      { text: input, top_k: 10 },
+      { timeout: QUERY_TIMEOUT_MS }
+    );
+
   const sendMessage = async () => {
     if (!input.trim() || serverStatus !== "online") return;
 
@@ -62,19 +83,30 @@ const Chatbot = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post(
-        `${BASE_URL}/query`,
-        { text: input, top_k: 10 }
-      );
+      let response;
+      try {
+        response = await postQuery();
+      } catch (err) {
+        // Only retry on network/timeout errors — not on server-returned error responses
+        if (!err.response) {
+          response = await postQuery();
+        } else {
+          throw err;
+        }
+      }
       const botMessage = {
         sender: "bot",
         text: response.data.response || "No response.",
       };
       setMessages((prev) => [...prev, botMessage]);
-    } catch {
+    } catch (err) {
+      const serverMessage = err.response?.data?.response;
       setMessages((prev) => [
         ...prev,
-        { sender: "bot", text: "Error contacting server." },
+        {
+          sender: "bot",
+          text: serverMessage || "Error contacting server. Please try again in a moment.",
+        },
       ]);
     }
 

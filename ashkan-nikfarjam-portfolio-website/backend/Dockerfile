@@ -16,4 +16,9 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # default command—adjust path to your uvicorn app module
-CMD ["uvicorn", "mcp.mcp_server:app", "--host", "0.0.0.0", "--port", "8000"]
+# Single worker by default: the fastembed/onnxruntime model is loaded once per worker
+# process, and 4 workers on Render's 512Mi plan OOM'd loading 4 copies of it.
+# Blocking Mistral/Pinecone calls are now offloaded to a threadpool (see mcp_server.py)
+# so one worker can still serve concurrent requests. Override via WEB_CONCURRENCY if you
+# upgrade the instance's memory.
+CMD ["sh", "-c", "uvicorn mcp.mcp_server:app --host 0.0.0.0 --port 8000 --workers ${WEB_CONCURRENCY:-1}"]

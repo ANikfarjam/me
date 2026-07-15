@@ -6,6 +6,7 @@ from fastapi import Body
 from fastapi.responses import JSONResponse
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from starlette.concurrency import run_in_threadpool
 import requests
 from pydantic import BaseModel
 from fastembed import TextEmbedding
@@ -55,6 +56,13 @@ except Exception as e:
     print(f"Failed to initialize VectorDB: {str(e)}")
     service_status["pinecone"] = f"error: {str(e)}"
     db = None
+
+# Load embedding model once at startup instead of per-request
+try:
+    embedding_model = TextEmbedding(model_name="BAAI/bge-small-en-v1.5")
+except Exception as e:
+    print(f"Failed to load embedding model: {str(e)}")
+    embedding_model = None
 
 # Probe Mistral once at startup to set initial status
 try:
@@ -137,7 +145,8 @@ def mistral_call(prompt: str) -> str:
 def get_query_embedding(query: str) -> List[float]:
     """Get embedding for a query with error handling"""
     try:
-        embedding_model = TextEmbedding(model_name="BAAI/bge-small-en-v1.5")
+        if embedding_model is None:
+            raise RuntimeError("Embedding model failed to load at startup")
         embeddings = list(embedding_model.embed(query))
         return [float(x) for x in embeddings[0]]
     except Exception as e:
@@ -205,7 +214,7 @@ Produce a concise factual summary that:
 
 Concise summary:"""
 
-        summarized_context = mistral_call(summarization_prompt)
+        summarized_context = await run_in_threadpool(mistral_call, summarization_prompt)
 
         # Step 4: Generate final response
         response_prompt = f"""You are a professional assistant for Ashkan Nikfarjam's portfolio website.
@@ -225,7 +234,7 @@ Context:
 
 Answer:"""
 
-        response = mistral_call(response_prompt)
+        response = await run_in_threadpool(mistral_call, response_prompt)
         return {"response": response.strip()}
 
     except HTTPException as he:
@@ -244,14 +253,15 @@ Answer:"""
 
 async def get_general_info(request: QueryRequest) -> List[DocumentResponse]:
     try:
-        indexes = db.list_indexes()
+        indexes = await run_in_threadpool(db.list_indexes)
         combined_results = []
 
-        query_embedding = get_query_embedding(request.text)
+        query_embedding = await run_in_threadpool(get_query_embedding, request.text)
 
         for index_name in indexes:
             try:
-                results = db.query_index(
+                results = await run_in_threadpool(
+                    db.query_index,
                     index_name=index_name,
                     query_embedding=query_embedding,
                     top_k=request.top_k
@@ -294,7 +304,7 @@ async def query_documents(request: QueryRequest) -> List[DocumentResponse]:
         )
         
         try:
-            category = mistral_call(category_prompt).lower().strip()
+            category = (await run_in_threadpool(mistral_call, category_prompt)).lower().strip()
             print(f'Selected category: {category}')
             
             # Handle unrelated questions immediately
@@ -324,14 +334,15 @@ async def query_documents(request: QueryRequest) -> List[DocumentResponse]:
             )
 
         # Step 2: Get query embedding
-        query_embedding = get_query_embedding(request.text)
+        query_embedding = await run_in_threadpool(get_query_embedding, request.text)
         print('Query embedding generated')
 
         # Step 3: Query vector DB — use paired retrieval for categories with supplements
         SUPPLEMENT_CATEGORIES = {"workexperience", "education"}
 
         if category in SUPPLEMENT_CATEGORIES:
-            resume_results, supplement_results = db.query_with_supplement(
+            resume_results, supplement_results = await run_in_threadpool(
+                db.query_with_supplement,
                 index_name=category,
                 query_embedding=query_embedding,
                 top_k=request.top_k
@@ -362,7 +373,8 @@ async def query_documents(request: QueryRequest) -> List[DocumentResponse]:
             ]
             return docs
 
-        results = db.query_index(
+        results = await run_in_threadpool(
+            db.query_index,
             index_name=category,
             query_embedding=query_embedding,
             top_k=request.top_k
