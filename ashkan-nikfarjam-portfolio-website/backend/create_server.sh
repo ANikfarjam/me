@@ -8,12 +8,12 @@ cd .
 
 # Step 2: Set up and activate virtual environment with uv
 echo "Setting up environment using uv..."
-uv venv .venv
+uv venv .venv --clear
 source .venv/bin/activate
 
 # Step 3: Install dependencies via uv
 echo "Installing dependencies with uv..."
-uv pip install "mcp[cli]" httpx
+uv pip install "mcp[cli]" -r requirements.txt
 
 # Step 4: Run MCP server as module
 echo "Starting MCP server..."

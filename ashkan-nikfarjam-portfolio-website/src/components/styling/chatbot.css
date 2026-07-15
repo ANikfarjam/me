@@ -340,6 +340,26 @@
   cursor: not-allowed;
 }
 
+/* ── Reconnect button (shown after an idle disconnect) ── */
+.chatbot-reconnect-btn {
+  flex: 1;
+  height: 38px;
+  border-radius: 11px;
+  background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+  color: #fff;
+  border: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.15s ease;
+}
+
+.chatbot-reconnect-btn:hover {
+  opacity: 0.85;
+  transform: scale(1.01);
+}
+
 /* ── Mobile ── */
 @media only screen and (max-width: 480px) {
   .chatbot-container {

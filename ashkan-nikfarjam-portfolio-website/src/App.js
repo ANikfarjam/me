@@ -429,6 +429,7 @@ function App() {
           </p>
           <div style={{ textAlign: 'center' }}>
             <iframe
+              title="Arduino mechanical arm prototype demo"
               src="https://www.youtube.com/embed/1q5wo_WGUrQ"
               width="640"
               height="360"
