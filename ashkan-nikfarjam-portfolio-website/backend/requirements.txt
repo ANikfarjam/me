@@ -26,5 +26,8 @@ nltk
 requests
 httpx
 
+# Claude (Anthropic) API client
+anthropic
+
 # Numerical computing
 numpy

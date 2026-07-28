@@ -8,6 +8,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.concurrency import run_in_threadpool
 import requests
+import anthropic
 from pydantic import BaseModel
 from fastembed import TextEmbedding
 import os
@@ -36,14 +37,15 @@ from pinecone_local.vectorDB import VectorDB
 load_dotenv()
 
 # Constants
-MISTRAL_API_KEY = os.getenv('MISTRAL_API_KEY')
-MISTRAL_API_URL = "https://api.mistral.ai/v1/chat/completions"
-MISTRAL_MODEL = "mistral-small"
+CLAUDE_API_KEY = os.getenv('CLAUDE_AI_KEY')
+CLAUDE_MODEL = "claude-haiku-4-5"
 PINE_API_KEY = os.getenv('PINE_API_KEY')
+
+claude_client = anthropic.Anthropic(api_key=CLAUDE_API_KEY)
 
 # In-memory service status — updated at startup and by real traffic
 service_status = {
-    "mistral": "unknown",
+    "claude": "unknown",
     "pinecone": "unknown",
 }
 
@@ -64,18 +66,17 @@ except Exception as e:
     print(f"Failed to load embedding model: {str(e)}")
     embedding_model = None
 
-# Probe Mistral once at startup to set initial status
+# Probe Claude once at startup to set initial status
 try:
-    resp = requests.post(
-        MISTRAL_API_URL,
-        headers={"Authorization": f"Bearer {MISTRAL_API_KEY}", "Content-Type": "application/json"},
-        json={"model": MISTRAL_MODEL, "messages": [{"role": "user", "content": "ping"}], "max_tokens": 1},
+    claude_client.messages.create(
+        model=CLAUDE_MODEL,
+        max_tokens=1,
+        messages=[{"role": "user", "content": "ping"}],
         timeout=8,
-        verify=False,
     )
-    service_status["mistral"] = "ok" if resp.status_code == 200 else f"error: HTTP {resp.status_code}"
+    service_status["claude"] = "ok"
 except Exception as e:
-    service_status["mistral"] = f"error: {str(e)}"
+    service_status["claude"] = f"error: {str(e)}"
 print("Service status at startup:", service_status)
 
 app = FastAPI(title="Portfolio MCP Server")
@@ -100,46 +101,41 @@ class DocumentResponse(BaseModel):
     score: float
     doc_type: str = "resume"  # "resume" | "supplement"
 
-def mistral_call(prompt: str) -> str:
-    """Wrapper for Mistral API calls with better error handling."""
+def claude_call(prompt: str, max_tokens: int = 1024) -> str:
+    """Wrapper for Claude API calls with better error handling."""
     try:
-        headers = {
-            "Authorization": f"Bearer {MISTRAL_API_KEY}",
-            "Content-Type": "application/json"
-        }
-        payload = {
-            "model": MISTRAL_MODEL,
-            "messages": [{"role": "user", "content": prompt}],
-            "temperature": 0.7
-        }
-        
-        # Use a session with retries
-        session = requests.Session()
-        retry = requests.adapters.HTTPAdapter(max_retries=3)
-        session.mount('https://', retry)
-        
-        response = session.post(
-            MISTRAL_API_URL,
-            headers=headers,
-            json=payload,
-            timeout=30,
-            verify=False  # Temporarily disable SSL verification
+        response = claude_client.messages.create(
+            model=CLAUDE_MODEL,
+            max_tokens=max_tokens,
+            temperature=0.7,
+            messages=[{"role": "user", "content": prompt}],
         )
-        response.raise_for_status()
-        service_status["mistral"] = "ok"
-        return response.json()["choices"][0]["message"]["content"]
-    except requests.exceptions.SSLError:
-        service_status["mistral"] = "error: SSL verification failed"
+        service_status["claude"] = "ok"
+        return response.content[0].text
+    except anthropic.RateLimitError as e:
+        service_status["claude"] = "error: rate limited"
+        retry_after = None
+        if e.response is not None:
+            retry_after = e.response.headers.get("retry-after")
+        detail = (
+            f"Ashkan's AI assistant has hit its usage limit and will be back in about {retry_after} seconds. "
+            f"Feel free to browse the site in the meantime."
+            if retry_after else
+            "Ashkan's AI assistant has hit its usage limit. Please try again in a few minutes."
+        )
+        raise HTTPException(status_code=429, detail=detail)
+    except anthropic.APIConnectionError:
+        service_status["claude"] = "error: connection failed"
         raise HTTPException(
             status_code=502,
-            detail="SSL verification failed. Please check your certificates."
+            detail="Could not reach the Claude API. Please try again."
         )
     except Exception as e:
-        service_status["mistral"] = f"error: {str(e)}"
-        print("Mistral API Error:", traceback.format_exc())
+        service_status["claude"] = f"error: {str(e)}"
+        print("Claude API Error:", traceback.format_exc())
         raise HTTPException(
             status_code=500,
-            detail=f"Mistral API request failed: {str(e)}"
+            detail=f"Claude API request failed: {str(e)}"
         )
 
 def get_query_embedding(query: str) -> List[float]:
@@ -214,7 +210,7 @@ Produce a concise factual summary that:
 
 Concise summary:"""
 
-        summarized_context = await run_in_threadpool(mistral_call, summarization_prompt)
+        summarized_context = await run_in_threadpool(claude_call, summarization_prompt)
 
         # Step 4: Generate final response
         response_prompt = f"""You are a professional assistant for Ashkan Nikfarjam's portfolio website.
@@ -234,7 +230,7 @@ Context:
 
 Answer:"""
 
-        response = await run_in_threadpool(mistral_call, response_prompt)
+        response = await run_in_threadpool(claude_call, response_prompt)
         return {"response": response.strip()}
 
     except HTTPException as he:
@@ -243,6 +239,8 @@ Answer:"""
                 status_code=400,
                 content={"response": "I can only answer questions about Ashkan Nikfarjam's professional background including education, projects, work experience, and resume."}
             )
+        if he.status_code == 429:
+            return JSONResponse(status_code=429, content={"response": he.detail})
         raise
     except Exception as e:
         print("Server error:", traceback.format_exc())
@@ -304,7 +302,7 @@ async def query_documents(request: QueryRequest) -> List[DocumentResponse]:
         )
         
         try:
-            category = (await run_in_threadpool(mistral_call, category_prompt)).lower().strip()
+            category = (await run_in_threadpool(claude_call, category_prompt, 20)).lower().strip()
             print(f'Selected category: {category}')
             
             # Handle unrelated questions immediately
@@ -411,10 +409,10 @@ if __name__ == "__main__":
     import uvicorn
     
     try:
-        test_response = mistral_call("Test connection")
-        print("Mistral AI initiated successfully!")
+        test_response = claude_call("Test connection", 10)
+        print("Claude AI initiated successfully!")
     except Exception as e:
-        print(f"Mistral AI test failed: {str(e)}")
+        print(f"Claude AI test failed: {str(e)}")
         sys.exit(1)
     
     uvicorn.run(
