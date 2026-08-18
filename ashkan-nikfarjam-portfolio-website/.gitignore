@@ -24,3 +24,4 @@ yarn-error.log*
 backend/pinecone/.env
 /backend/planning/
 backend/mcp/.env
+backend/pinecone_local/.env
