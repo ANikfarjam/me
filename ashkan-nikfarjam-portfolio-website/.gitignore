@@ -13,15 +13,16 @@
 
 # misc
 .DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env
+.env.*
+*.env
 
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-backend/pinecone/.env
 /backend/planning/
-backend/mcp/.env
-backend/pinecone_local/.env
+backend/mcp/usage_state.json
+
+# python
+__pycache__/
+*.py[cod]
