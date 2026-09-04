@@ -124,7 +124,6 @@ def claude_call(prompt: str, max_tokens: int = 1024) -> str:
         response = claude_client.messages.create(
             model=CLAUDE_MODEL,
             max_tokens=max_tokens,
-            temperature=0.7,
             messages=[{"role": "user", "content": prompt}],
         )
         service_status["claude"] = "ok"
@@ -181,6 +180,12 @@ def get_query_embedding(query: str) -> List[float]:
             status_code=500,
             detail=f"Embedding generation failed: {str(e)}"
         )
+
+@app.get("/")
+async def root():
+    """Avoid 404 noise from Render/uptime pings hitting the root path."""
+    return JSONResponse(status_code=200, content={"status": "ok"})
+
 
 @app.get("/health")
 async def health_check():
