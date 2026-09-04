@@ -49,6 +49,23 @@ service_status = {
     "pinecone": "unknown",
 }
 
+# Shown to visitors whenever Claude is unreachable because Anthropic rejected
+# the request for lack of credits (billing_error, or a low/zero balance
+# reported via a 400/403 response).
+OUT_OF_CREDITS_MSG = (
+    "Ashkan's AI assistant is temporarily out of credits and will be back once "
+    "more are added. Feel free to browse the site in the meantime, or contact "
+    "Ashkan directly."
+)
+
+
+def _is_out_of_credits(e: Exception) -> bool:
+    """Detect an exhausted-balance response regardless of the exact status
+    code Anthropic uses for it (observed as both 400 and 403)."""
+    if getattr(e, "type", None) == "billing_error":
+        return True
+    return "credit balance" in str(e).lower()
+
 # Initialize components with error handling
 try:
     db = VectorDB()
@@ -124,6 +141,16 @@ def claude_call(prompt: str, max_tokens: int = 1024) -> str:
             "Ashkan's AI assistant has hit its usage limit. Please try again in a few minutes."
         )
         raise HTTPException(status_code=429, detail=detail)
+    except (anthropic.PermissionDeniedError, anthropic.BadRequestError) as e:
+        if _is_out_of_credits(e):
+            service_status["claude"] = "error: out of credits"
+            raise HTTPException(status_code=503, detail=OUT_OF_CREDITS_MSG)
+        service_status["claude"] = f"error: {str(e)}"
+        print("Claude API permission error:", traceback.format_exc())
+        raise HTTPException(
+            status_code=500,
+            detail=f"Claude API request failed: {str(e)}"
+        )
     except anthropic.APIConnectionError:
         service_status["claude"] = "error: connection failed"
         raise HTTPException(
@@ -131,6 +158,9 @@ def claude_call(prompt: str, max_tokens: int = 1024) -> str:
             detail="Could not reach the Claude API. Please try again."
         )
     except Exception as e:
+        if _is_out_of_credits(e):
+            service_status["claude"] = "error: out of credits"
+            raise HTTPException(status_code=503, detail=OUT_OF_CREDITS_MSG)
         service_status["claude"] = f"error: {str(e)}"
         print("Claude API Error:", traceback.format_exc())
         raise HTTPException(
@@ -239,8 +269,8 @@ Answer:"""
                 status_code=400,
                 content={"response": "I can only answer questions about Ashkan Nikfarjam's professional background including education, projects, work experience, and resume."}
             )
-        if he.status_code == 429:
-            return JSONResponse(status_code=429, content={"response": he.detail})
+        if he.status_code in (429, 502, 503):
+            return JSONResponse(status_code=he.status_code, content={"response": he.detail})
         raise
     except Exception as e:
         print("Server error:", traceback.format_exc())
@@ -412,9 +442,12 @@ if __name__ == "__main__":
         test_response = claude_call("Test connection", 10)
         print("Claude AI initiated successfully!")
     except Exception as e:
-        print(f"Claude AI test failed: {str(e)}")
-        sys.exit(1)
-    
+        # Don't block server startup on Claude being reachable — the /status
+        # endpoint already reports "degraded" and claude_call() will retry on
+        # every real request, so a boot-time outage (e.g. no credits) should
+        # not take down the whole server.
+        print(f"Claude AI test failed, starting in degraded mode: {str(e)}")
+
     uvicorn.run(
         app,
         host="0.0.0.0",

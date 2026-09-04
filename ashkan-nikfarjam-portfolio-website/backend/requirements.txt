@@ -27,7 +27,7 @@ requests
 httpx
 
 # Claude (Anthropic) API client
-anthropic
+anthropic>=0.120.0
 
 # Numerical computing
 numpy
