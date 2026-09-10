@@ -106,19 +106,20 @@ const Chatbot = () => {
     checkHealth();
   };
 
-  const postQuery = () =>
+  const postQuery = (text) =>
     axios.post(
       `${BASE_URL}/query`,
-      { text: input, top_k: 10 },
+      { text, top_k: 10 },
       { timeout: QUERY_TIMEOUT_MS }
     );
 
   const sendMessage = async () => {
-    if (!input.trim() || serverStatus !== "online") return;
+    const text = input.trim();
+    if (!text || loading || serverStatus !== "online") return;
 
     scheduleDisconnect(); // sending a message counts as activity — push out the idle timeout
 
-    const userMessage = { sender: "user", text: input };
+    const userMessage = { sender: "user", text };
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
     setLoading(true);
@@ -128,7 +129,7 @@ const Chatbot = () => {
       let lastErr = null;
       for (let attempt = 1; attempt <= MAX_QUERY_ATTEMPTS; attempt++) {
         try {
-          response = await postQuery();
+          response = await postQuery(text);
           lastErr = null;
           break;
         } catch (err) {
@@ -161,6 +162,7 @@ const Chatbot = () => {
 
   const isOffline = serverStatus === "offline";
   const isDisconnected = serverStatus === "disconnected";
+  const isConnecting = serverStatus === "checking";
   const isUnavailable = isOffline || isDisconnected;
 
   return (
@@ -176,8 +178,18 @@ const Chatbot = () => {
               <div>
                 <div className="chatbot-header-name">Ashkan's Assistant</div>
                 <div className="chatbot-header-status">
-                  <span className={`chatbot-status-dot ${isUnavailable ? "offline" : ""}`} />
-                  {isDisconnected ? "Disconnected" : isOffline ? "Maintenance" : "Online"}
+                  <span
+                    className={`chatbot-status-dot ${
+                      isUnavailable ? "offline" : isConnecting ? "connecting" : ""
+                    }`}
+                  />
+                  {isDisconnected
+                    ? "Disconnected"
+                    : isOffline
+                    ? "Maintenance"
+                    : isConnecting
+                    ? "Connecting…"
+                    : "Online"}
                 </div>
               </div>
             </div>
@@ -221,9 +233,19 @@ const Chatbot = () => {
           </div>
 
           {/* Input */}
-          <div className="chatbot-input">
+          <form
+            className="chatbot-input"
+            onSubmit={(e) => {
+              e.preventDefault();
+              sendMessage();
+            }}
+          >
             {isDisconnected ? (
-              <button className="chatbot-reconnect-btn" onClick={handleReconnect}>
+              <button
+                type="button"
+                className="chatbot-reconnect-btn"
+                onClick={handleReconnect}
+              >
                 Reconnect
               </button>
             ) : (
@@ -232,20 +254,26 @@ const Chatbot = () => {
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-                  placeholder={isOffline ? "Chatbot is currently unavailable..." : "Ask me anything..."}
-                  disabled={isOffline}
+                  enterKeyHint="send"
+                  placeholder={
+                    isOffline
+                      ? "Chatbot is currently unavailable..."
+                      : isConnecting
+                      ? "Connecting to the assistant..."
+                      : "Ask me anything..."
+                  }
+                  disabled={isOffline || isConnecting}
                 />
                 <button
-                  onClick={sendMessage}
-                  disabled={!input.trim() || isOffline}
+                  type="submit"
+                  disabled={!input.trim() || isOffline || isConnecting || loading}
                   aria-label="Send message"
                 >
                   <FaPaperPlane size={13} />
                 </button>
               </>
             )}
-          </div>
+          </form>
         </div>
       )}
 
