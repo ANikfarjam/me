@@ -12,6 +12,7 @@ import germanyIcon from './assets/germany.jpg';
 import connect4Icon from './assets/connect4.png';
 import healthmapIcon from './assets/healthmap.png';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import ImageSlider from './components/imageSlider';
 import WorkExperienceTimeline from './components/workexperience';
 import AnimatedBackground from './components/AnimatedBackground';
@@ -85,6 +86,7 @@ function App() {
   const [gemanCityContent, setgemanCityContent] = useState('');
   const [connect4Content, setconnect4Content] = useState('');
   const [healthMapContent, sethealthMapContent] = useState('');
+  const [careerPilotContent, setCareerPilotContent] = useState('');
 
   useEffect(() => {
     fetch(`${process.env.PUBLIC_URL}/projects/GeneScope/GeneScope.md`).then(r => r.text()).then(setGeneScopeContent);
@@ -109,6 +111,9 @@ function App() {
   }, []);
   useEffect(() => {
     fetch(`${process.env.PUBLIC_URL}/projects/healthMap/healthmap.md`).then(r => r.text()).then(sethealthMapContent);
+  }, []);
+  useEffect(() => {
+    fetch(`${process.env.PUBLIC_URL}/projects/CareerPilot/careerpilot.md`).then(r => r.text()).then(setCareerPilotContent);
   }, []);
 
   // Image galleries
@@ -162,6 +167,16 @@ function App() {
   const healthmapImeges = [
     'https://raw.github.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/healthMap/image/healthmap.jpeg',
   ];
+  const careerPilotMediaBase = 'https://raw.githubusercontent.com/ANikfarjam/AshkanNikfarjam.github.io/main/ashkan-nikfarjam-portfolio-website/public/projects/CareerPilot/media';
+  const careerPilotImages = [
+    'searching.png',
+    'analytix.png',
+    'knowledge_update.png',
+    'Knowledge_updatedresult.png',
+    'search_result.png',
+    'resume.png',
+    'docs.png',
+  ].map((file) => `${careerPilotMediaBase}/${file}`);
 
   const sections = [
     {
@@ -278,12 +293,20 @@ function App() {
           <div className="project-cards">
             {[
               {
+                name: 'CareerPilot',
+                links: ['https://github.com/ANikfarjam/CareerPilot'],
+                description: 'An open-source, multi-agent job search assistant that runs entirely on your own hardware. It screens job postings against your background, tracks applications, and tailors your resume using a locally served LLM.',
+                image: `${careerPilotMediaBase}/Logo.jpeg`,
+                imageGallery: careerPilotImages,
+                detailedDescription: <ReactMarkdown remarkPlugins={[remarkGfm]}>{careerPilotContent}</ReactMarkdown>,
+              },
+              {
                 name: 'GeneScope',
                 links: ['https://gene-scope-liard.vercel.app/', 'https://github.com/ANikfarjam/GeneScope'],
                 description: 'A deep learning platform for biomedical research that classifies patient clinical and genomic data into breast cancer stages using a multimodal model and integrates an LLM-powered chatbot.',
                 image: genescope_icon,
                 imageGallery: geneScopeImages,
-                detailedDescription: <ReactMarkdown>{geneScopeContent}</ReactMarkdown>,
+                detailedDescription: <ReactMarkdown remarkPlugins={[remarkGfm]}>{geneScopeContent}</ReactMarkdown>,
               },
               {
                 name: 'X-ray Image Classification CNN-RNN',
@@ -291,7 +314,7 @@ function App() {
                 description: 'An X-ray image classifier built on a CNN-RNN hybrid model that detects and classifies bone fractures, while also identifying the type of bone (e.g., hand, leg).',
                 image: xrayImg,
                 imageGallery: xrayImages,
-                detailedDescription: <ReactMarkdown>{xrayContent}</ReactMarkdown>,
+                detailedDescription: <ReactMarkdown remarkPlugins={[remarkGfm]}>{xrayContent}</ReactMarkdown>,
               },
               {
                 name: 'StairCase',
@@ -299,7 +322,7 @@ function App() {
                 description: 'A cross-platform multiplayer game with LLM-driven trivia and hangman mini-games using LangChain agents.',
                 image: staircaseImg,
                 imageGallery: stairCaseImages,
-                detailedDescription: <ReactMarkdown>{stairCaseContent}</ReactMarkdown>,
+                detailedDescription: <ReactMarkdown remarkPlugins={[remarkGfm]}>{stairCaseContent}</ReactMarkdown>,
               },
               {
                 name: 'GeneQuest',
@@ -307,7 +330,7 @@ function App() {
                 description: 'A genomic research web app that unifies BLAST, GenBank search, and phylogenetic tools into one simple interface.',
                 image: geneQuestIcon,
                 imageGallery: genequestImges,
-                detailedDescription: <ReactMarkdown>{geneQuestContent}</ReactMarkdown>,
+                detailedDescription: <ReactMarkdown remarkPlugins={[remarkGfm]}>{geneQuestContent}</ReactMarkdown>,
               },
               {
                 name: 'MockTheStock',
@@ -315,7 +338,7 @@ function App() {
                 description: 'A full-stack web application built to simulate real-world trading and create stock portfolios.',
                 image: stockMarketLogo,
                 imageGallery: stockMarketImges,
-                detailedDescription: <ReactMarkdown>{stockMarketContent}</ReactMarkdown>,
+                detailedDescription: <ReactMarkdown remarkPlugins={[remarkGfm]}>{stockMarketContent}</ReactMarkdown>,
               },
               {
                 name: 'CityPlus (Germany)',
@@ -323,7 +346,7 @@ function App() {
                 description: "An AI-powered web application that recommends cities in Germany based on the user's personal preferences.",
                 image: germanyIcon,
                 imageGallery: germanImges,
-                detailedDescription: <ReactMarkdown>{gemanCityContent}</ReactMarkdown>,
+                detailedDescription: <ReactMarkdown remarkPlugins={[remarkGfm]}>{gemanCityContent}</ReactMarkdown>,
               },
               {
                 name: 'Connect4',
@@ -331,7 +354,7 @@ function App() {
                 description: 'A single player Connect4 game where players play against an AI agent.',
                 image: connect4Icon,
                 imageGallery: connect4Imges,
-                detailedDescription: <ReactMarkdown>{connect4Content}</ReactMarkdown>,
+                detailedDescription: <ReactMarkdown remarkPlugins={[remarkGfm]}>{connect4Content}</ReactMarkdown>,
               },
               {
                 name: 'HealthMap',
@@ -339,7 +362,7 @@ function App() {
                 description: 'An interactive data visualization dashboard analyzing the most common respiratory diseases across the U.S.',
                 image: healthmapIcon,
                 imageGallery: healthmapImeges,
-                detailedDescription: <ReactMarkdown>{healthMapContent}</ReactMarkdown>,
+                detailedDescription: <ReactMarkdown remarkPlugins={[remarkGfm]}>{healthMapContent}</ReactMarkdown>,
               },
             ].map((project) => (
               <div key={project.name} className="project-card">

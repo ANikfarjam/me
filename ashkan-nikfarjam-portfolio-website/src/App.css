@@ -679,6 +679,45 @@ h1, h2, h3, h4 {
   color: var(--muted);
 }
 
+/* Markdown tables (GFM) inside project details */
+.markdown-body table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.markdown-body th,
+.markdown-body td {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+  min-width: 6rem;
+}
+
+.markdown-body th {
+  background: rgba(251, 191, 36, 0.08);
+  color: var(--amber);
+  font-weight: 600;
+}
+
+.markdown-body tbody tr:nth-child(even) td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.markdown-body code {
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
+  padding: 0.1em 0.35em;
+  font-size: 0.85em;
+  word-break: break-word;
+}
+
 .modal-content button {
   background: transparent;
   color: var(--amber);
